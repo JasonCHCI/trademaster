@@ -1,0 +1,30 @@
+Options -Indexes
+
+RewriteEngine on
+
+# ErrorDocument 404 /app/controller/error.php
+
+# Site
+#---------------------------------Example-----------------------------------#
+#                                                                           #
+#   RewriteRule ^home/?$ ^home/?$ siteController.php?action=home [QSA,L]    #
+#       Your page URL will be: http://localhost/trademaster/home            #
+#       SiteController will route with action name "home" and call          #
+#       route("home") function in siteController.php.                       #
+#                                                                           #
+#---------------------------------------------------------------------------#
+
+RewriteRule ^$ siteController.php?action=home [QSA,L]
+RewriteRule ^home/?$ siteController.php?action=home [QSA,L]
+
+
+
+#Stock
+#--------------------------------------------------Example--------------------------------------------------#
+#                                                                                                           #
+#   RewriteRule ^stocks/(\d+)/?$ app/controller/stockController.php?action=product&sid=$1 [QSA,L]           #
+#       Your page URL will be: http://localhost/trademaster/stocks/2                                        #
+#       stockController will route with action name "stocks" and call route("home") function                #
+#       in stockController.php with stock ID(sid) equals 2                                                  #
+#                                                                                                           #
+#-----------------------------------------------------------------------------------------------------------#
