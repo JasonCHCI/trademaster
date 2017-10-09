@@ -5,7 +5,7 @@
 1. Open your XAMPP app, switch to "Manage Servers" tab. Run "MySQL Database" and "Apache Web Server"
 1. In Terminal, navigate to your Applications/XAMPP/htdocs folder `$ cd /Applications/XAMPP/htdocs`
 1. Clone this repository `$ git clone https://github.com/JasonCHCI/trademaster.git`
-1. Create a new database called "Trademaster" and import the sql file into the database
+1. Create a new database called "Trademaster" and import the sql file into the database (Skip this for now)
 1. Our website can be accessed at:  http://localhost/trademaster
 1. phpmyadmin can be accessed at: http://localhost/phpmyadmin/
 
