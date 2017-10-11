@@ -14,6 +14,10 @@ class SiteController {
 	// route us to the appropriate class method for this action
 	public function route($action) {
 		switch($action) {
+			case 'welcome':
+			$this->welcome();
+			break;
+
 			case 'home':
 			$this->home();
 			break;
@@ -27,8 +31,17 @@ class SiteController {
 
 	}
 
+	public function welcome() {
+		$pageName = 'Welcome';
+		include_once SYSTEM_PATH.'/view/header.html';
+		include_once SYSTEM_PATH.'/view/welcome.html';
+		include_once SYSTEM_PATH.'/view/footer.html';
+	}
+
 	public function home() {
 		$pageName = 'Home';
+		include_once SYSTEM_PATH.'/view/header.html';
 		include_once SYSTEM_PATH.'/view/home.html';
+		include_once SYSTEM_PATH.'/view/footer.html';
 	}
 }

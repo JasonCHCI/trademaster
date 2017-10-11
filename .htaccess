@@ -14,7 +14,8 @@ RewriteEngine on
 #                                                                           #
 #---------------------------------------------------------------------------#
 
-RewriteRule ^$ siteController.php?action=home [QSA,L]
+RewriteRule ^$ siteController.php?action=welcome [QSA,L]
+RewriteRule ^welcome/?$ siteController.php?action=welcome [QSA,L]
 RewriteRule ^home/?$ siteController.php?action=home [QSA,L]
 
 
