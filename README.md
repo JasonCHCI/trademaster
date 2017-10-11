@@ -1,19 +1,18 @@
 # Trade Master Instructions for Mac
 
 ### Set up on your local machine:
-1. Download XAMPP at: https://www.apachefriends.org/index.html
-1. Open your XAMPP app, switch to "Manage Servers" tab. Run "MySQL Database" and "Apache Web Server"
-1. In Terminal, navigate to your Applications/XAMPP/htdocs folder
-* `$ cd /Applications/XAMPP/htdocs`
-1. Clone this repository 
-* `$ git clone https://github.com/JasonCHCI/trademaster.git`
-1. Create a new database called "Trademaster" and import the sql file into the database
+1. Download XAMPP from: https://www.apachefriends.org/xampp-files/7.1.9/xampp-osx-7.1.9-0-installer.dmg
+1. Open your "manager-osx" app that you installed along with XAMPP in the first step, switch to "Manage Servers" tab. Run "MySQL Database" and "Apache Web Server"
+1. In Terminal, navigate to your Applications/XAMPP/htdocs folder `$ cd /Applications/XAMPP/htdocs`
+1. Clone this repository `$ git clone https://github.com/JasonCHCI/trademaster.git`
+1. Create a new database called "Trademaster" and import the sql file into the database (Skip this for now)
 1. Our website can be accessed at:  http://localhost/trademaster
 1. phpmyadmin can be accessed at: http://localhost/phpmyadmin/
 
 ### How to contribute:
-1. Navigate to root of repository * `$ cd /Applications/XAMPP/htdocs/trademaster`
-1. Update your local master branch
+1. Navigate to root of repository 
+*`$ cd /Applications/XAMPP/htdocs/trademaster`
+1. Update your local master branch 
 * `$ git checkout master`
 * `$ git pull`
 1. Create and switch to your own branch (Please do not work on master branch directly as it is very likely to mess up the repo and cause merge conflicts)
@@ -22,14 +21,14 @@
 1. Implement and update code on your branch
 1. Create pull request
   1. Add changed files
-    * `$ git add ChangedFile1 ChangedFile2 ...`
+	* `$ git add ChangedFile1 ChangedFile2 ...`
   1. Commit changes to local branch
-    * `$ git commit -m "<your branch name>:<your message>"`
-    * e.g. If I am committing, `$ git commit -m "Jue: Asynchronous Data interchange implemented"`
+	* `$ git commit -m "<your branch name>:<your message>"`
+	* e.g. If I am committing, `$ git commit -m "Jue: Asynchronous Data interchange implemented"`
   1. Push changes to remote branch
-    * `$ git push origin <your branch name>`
+	* `$ git push origin <your branch name>`
   1. GitHub: create pull request for your branch into Master
-    * https://github.com/JasonCHCI/trademaster/compare?expand=1
+	* https://github.com/JasonCHCI/trademaster/compare?expand=1
       1. Select base branch: master
       1. Select compare branch: Your Branch
       1. Enter some meaningful comments
