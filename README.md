@@ -4,7 +4,7 @@
 1. Download XAMPP from: https://www.apachefriends.org/xampp-files/7.1.9/xampp-osx-7.1.9-0-installer.dmg
 1. Open your "manager-osx" app that you installed along with XAMPP in the first step, switch to "Manage Servers" tab. Start "MySQL Database" and "Apache Web Server"
 1. In Terminal, navigate to your Applications/XAMPP/htdocs folder `$ cd /Applications/XAMPP/htdocs`
-1. Clone this repository `$ git clone https://github.com/JasonCHCI/trademaster.git` (If you have permission issue with git command, please confihure your SSH key or use SourceTree)
+1. Clone this repository `$ git clone https://github.com/JasonCHCI/trademaster.git` (If you have permission issue with git command, please configure your SSH key or use SourceTree)
 1. Create a new database called "Trademaster" and import the sql file into the database (Skip this for now)
 1. Our website can be accessed at:  http://localhost/trademaster (Be sure you have XAMPP running in step 2)
 1. phpmyadmin can be accessed at: http://localhost/phpmyadmin/
