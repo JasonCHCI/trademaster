@@ -59,6 +59,10 @@ body {
     width: 50%;
 }
 
+.stockshow {
+    margin-left: 20px;
+    margin-right: 20px;
+}
 /* Clear floats after the columns */
 .row:after {
     content: "";
