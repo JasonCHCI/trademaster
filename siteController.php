@@ -27,6 +27,9 @@ class SiteController
             case 'membership':
                 $this->membership();
                 break;
+            case 'pricing':
+                $this->pricing();
+                break;
 
             // redirect to home page if all else fails
             default:
@@ -58,6 +61,13 @@ class SiteController
         $pageName = 'Membership';
         include_once SYSTEM_PATH . '/view/header.html';
         include_once SYSTEM_PATH . '/view/membership.html';
+        include_once SYSTEM_PATH . '/view/footer.html';
+    }
+    public function pricing()
+    {
+        $pageName = 'Pricing';
+        include_once SYSTEM_PATH . '/view/header.html';
+        include_once SYSTEM_PATH . '/view/stock_info.html';
         include_once SYSTEM_PATH . '/view/footer.html';
     }
 }
