@@ -31,6 +31,10 @@ class SiteController
                 $this->pricing();
                 break;
 
+            case 'trade':
+                $this->trade();
+                break;
+
             // redirect to home page if all else fails
             default:
                 header('Location: ' . BASE_URL);
@@ -70,6 +74,14 @@ class SiteController
         $pageName = 'Pricing';
         include_once SYSTEM_PATH . '/view/header.html';
         include_once SYSTEM_PATH . '/view/stock_info.html';
+        include_once SYSTEM_PATH . '/view/footer.html';
+    }
+
+    public function trade()
+    {
+        $pageName = 'Trade';
+        include_once SYSTEM_PATH . '/view/header.html';
+        include_once SYSTEM_PATH . '/view/trade.html';
         include_once SYSTEM_PATH . '/view/footer.html';
     }
 }
