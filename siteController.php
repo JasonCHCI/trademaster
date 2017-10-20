@@ -9,39 +9,67 @@ $action = $_GET['action'];
 $pc = new SiteController();
 $pc->route($action);
 
-class SiteController {
+class SiteController
+{
 
-	// route us to the appropriate class method for this action
-	public function route($action) {
-		switch($action) {
-			case 'welcome':
-			$this->welcome();
-			break;
+    // route us to the appropriate class method for this action
+    public function route($action)
+    {
+        switch ($action) {
+            case 'welcome':
+                $this->welcome();
+                break;
 
-			case 'home':
-			$this->home();
-			break;
+            case 'home':
+                $this->home();
+                break;
 
-			// redirect to home page if all else fails
-			default:
-			header('Location: '.BASE_URL);
-			exit();
+            case 'membership':
+                $this->membership();
+                break;
+            case 'pricing':
+                $this->pricing();
+                break;
 
-		}
+            // redirect to home page if all else fails
+            default:
+                header('Location: ' . BASE_URL);
+                exit();
 
-	}
+        }
 
-	public function welcome() {
-		$pageName = 'Welcome';
-		include_once SYSTEM_PATH.'/view/header.html';
-		include_once SYSTEM_PATH.'/view/welcome.html';
-		include_once SYSTEM_PATH.'/view/footer.html';
-	}
+    }
 
-	public function home() {
-		$pageName = 'Home';
-		include_once SYSTEM_PATH.'/view/header.html';
-		include_once SYSTEM_PATH.'/view/home.html';
-		include_once SYSTEM_PATH.'/view/footer.html';
-	}
+    public function welcome()
+    {
+        $pageName = 'Welcome';
+        include_once SYSTEM_PATH . '/view/header.html';
+        include_once SYSTEM_PATH . '/view/welcome.html';
+        include_once SYSTEM_PATH . '/view/footer.html';
+    }
+
+    public function home()
+    {
+        $pageName = 'Home';
+
+        $result = Test::getAllStocks();
+        include_once SYSTEM_PATH . '/view/header.html';
+        include_once SYSTEM_PATH . '/view/home.html';
+        include_once SYSTEM_PATH . '/view/footer.html';
+    }
+
+    public function membership()
+    {
+        $pageName = 'Membership';
+        include_once SYSTEM_PATH . '/view/header.html';
+        include_once SYSTEM_PATH . '/view/membership.html';
+        include_once SYSTEM_PATH . '/view/footer.html';
+    }
+    public function pricing()
+    {
+        $pageName = 'Pricing';
+        include_once SYSTEM_PATH . '/view/header.html';
+        include_once SYSTEM_PATH . '/view/stock_info.html';
+        include_once SYSTEM_PATH . '/view/footer.html';
+    }
 }

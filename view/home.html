@@ -9,26 +9,42 @@
       <br>
       <div class="left-navigation">
         <ul class="list">
-          <h5><strong class="cat">Stock</strong></h5>
-          <li><a class="nav-link home-left" href="#">Link</a></li>
-          <li><a class="nav-link home-left" href="#">Link</a></li>
-          <li><a class="nav-link home-left" href="#">Link</a></li>
-          <li><a class="nav-link home-left" href="#">Link</a></li>
-        </ul>
-
-        <br>
-
-        <ul class="list">
-          <h5><strong class="cat">Company</strong></h5>
-          <li><a class="nav-link home-left" href="#">Link</a></li>
-          <li><a class="nav-link home-left" href="#">Link</a></li>
-          <li><a class="nav-link home-left" href="#">Link</a></li>
+          <li><a class="home-left" href="<?= BASE_URL ?>/pricing">Research</a></li>
+          <li><a class="home-left" href="#">Transaction History</a></li>
+          <li><a class="home-left" href="#">My Balance</a></li>
+          <li><a class="home-left" href="#">Prediction</a></li>
         </ul>
       </div>
     </div>
-    <div class="content">
+    <div class="content homelist">
       <!--Main content code to be written here --> 
-      <img class="main-content" src="http://vignette4.wikia.nocookie.net/justdance/images/7/70/Placeholder_pictos-sprite.png/revision/latest?cb=20150930150619" alt="placehoder">
+      <ul id="main" style="width: 75%">
+        <?php
+          $conn = mysql_connect(DB_HOST, DB_USER, DB_PASS)
+          or die ('Error: Could not connect to MySql database');
+          mysql_select_db(DB_DATABASE);
+          $last_ID = mysql_fetch_assoc(mysql_query('SELECT MAX(id) FROM test'))['MAX(id)'];
+          for($i = 1; $i <= $last_ID; $i++){
+            $q = sprintf("SELECT * FROM test WHERE id = %d", $i);
+            $result = mysql_query($q);
+            $row = mysql_fetch_assoc($result);
+            
+        ?>
+        <div style="padding-top: 20px;">
+          <div class="card">
+            <h3 class="card-header"><?= $row['ticket number'] ?></h3>
+            <div class="card-block">
+              <h4 class="card-title">Price: $<?= $row['price'] ?></h4>
+              <p class="card-text">Current Volume: <?= $row['volume'] ?></p>
+              <a href="#" class="btn btn-primary">View Detail</a>
+            </div>
+          </div>
+        </div>
+        <?php
+          
+        }
+        ?>
+      </ul>
       
     </div>
   </div>

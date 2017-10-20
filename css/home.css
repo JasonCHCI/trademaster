@@ -53,6 +53,12 @@
     cursor: pointer;
 }
 
-.cat {
-    color: #1ab2ff;
+#main {
+    padding-left: 10%;
+    position: absolute;
+}
+
+.homecard {
+    padding-top: 10%;
+    position: absolute;
 }

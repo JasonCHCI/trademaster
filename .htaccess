@@ -18,6 +18,8 @@ RewriteRule ^$ siteController.php?action=welcome [QSA,L]
 RewriteRule ^welcome/?$ siteController.php?action=welcome [QSA,L]
 RewriteRule ^home/?$ siteController.php?action=home [QSA,L]
 RewriteRule ^login/?$ siteController.php?action=login [QSA,L]
+RewriteRule ^membership/?$ siteController.php?action=membership [QSA,L]
+RewriteRule ^pricing/?$ siteController.php?action=pricing [QSA,L]
 
 
 
