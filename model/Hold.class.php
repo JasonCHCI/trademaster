@@ -1,30 +1,30 @@
 <?php
 
-class Test extends DbObject {
+class Hold extends DbObject {
     // name of database table
-    const DB_TABLE = 'test';
+    const DB_TABLE = 'hold';
 
     // database fields
     protected $id;
-    public $ticket_number;
-    protected $price;
+    protected $user_id;
     protected $volume;
+    protected $symbol;
 
     // constructor
     public function __construct($args = array()) {
         $defaultArgs = array(
             'id' => null,
-            'ticket_number' => '',
-            'price' => 0,
+            'user_id' => 0,
             'volume' => 0,
+            'symbol' => ''
             );
 
         $args += $defaultArgs;
 
         $this->id = $args['id'];
-        $this->title = $args['ticket_number'];
-        $this->price = $args['price'];
+        $this->user_id = $args['user_id'];
         $this->volume = $args['volume'];
+        $this->symbol = $args['symbol'];
     }
 
     // save changes to object
@@ -32,9 +32,10 @@ class Test extends DbObject {
         $db = Db::instance();
         // omit id and any timestamps
         $db_properties = array(
-            'ticket_number' => $this->ticket_number,
-            'price' => $this->price,
-            'volume' => $this->volume
+            'id' => $this->id,
+            'user_id' => $this->user_id,
+            'volume' => $this->volume,
+            'symbol' => $this->symbol
             );
         $db->store($this, __CLASS__, self::DB_TABLE, $db_properties);
     }
@@ -46,26 +47,26 @@ class Test extends DbObject {
         return $obj;
     }
 
-    // load object by title
-    public static function loadByTitle($title) {
-        $db = Db::instance();
-        $obj = $db->fetchById($title, __CLASS__, self::DB_TABLE);
-        return $obj;
-    }
-
-
-
     // load all products
-    public static function getAllStocks($limit=null) {
-        $query = sprintf(" SELECT * FROM %s ORDER BY id ASC ",
-            self::DB_TABLE
+    public static function getHoldsByUserId($userID=null, $limit=null) {
+        if($userID==null) {
+          return null;
+        }
+
+        $query = sprintf(" SELECT id FROM %s WHERE uid = %d",
+            self::DB_TABLE,
+            $userID
             );
         $db = Db::instance();
         $result = $db->lookup($query);
         if(!mysql_num_rows($result))
             return null;
         else {
-            return ($result);
+            $objects = array();
+            while($row = mysql_fetch_assoc($result)) {
+                $objects[] = self::loadById($row['id']);
+            }
+            return ($objects);
         }
     }
 

@@ -19,31 +19,30 @@
     <div class="content homelist">
       <!--Main content code to be written here --> 
       <ul id="main" style="width: 75%">
+        <?php if($holdings == null): ?>
+
+        <h1 style="color: white;">You are not holding any stock yet.</h1>
+
+        <?php else: ?>
+
+        <?php foreach($holdings as $holding): ?>
+
         <?php
-          $conn = mysql_connect(DB_HOST, DB_USER, DB_PASS)
-          or die ('Error: Could not connect to MySql database');
-          mysql_select_db(DB_DATABASE);
-          $last_ID = mysql_fetch_assoc(mysql_query('SELECT MAX(id) FROM test'))['MAX(id)'];
-          for($i = 1; $i <= $last_ID; $i++){
-            $q = sprintf("SELECT * FROM test WHERE id = %d", $i);
-            $result = mysql_query($q);
-            $row = mysql_fetch_assoc($result);
-            
+          $ticket = $holding->get('symbol');
         ?>
         <div style="padding-top: 20px;">
           <div class="card">
-            <h3 class="card-header"><?= $row['ticket number'] ?></h3>
+            <h3 class="card-header"><?= $ticket ?></h3>
             <div class="card-block">
-              <h4 class="card-title">Price: $<?= $row['price'] ?></h4>
-              <p class="card-text">Current Volume: <?= $row['volume'] ?></p>
+              <h4 class="card-title">Price: Pending</h4>
+              <p class="card-text">Current Volume: <?= $holding->get('volume') ?></p>
               <a href="#" class="btn btn-primary">View Detail</a>
             </div>
           </div>
         </div>
-        <?php
-          
-        }
-        ?>
+        <?php endforeach; ?>
+
+        <?php endif; ?>
       </ul>
       
     </div>
