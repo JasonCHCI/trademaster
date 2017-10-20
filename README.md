@@ -1,7 +1,7 @@
 # Trade Master Instructions for Mac
 
 ### Set up on your local machine:
-1. Download XAMPP from: https://www.apachefriends.org/xampp-files/7.1.9/xampp-osx-7.1.9-0-installer.dmg
+1. Download XAMPP from: https://sourceforge.net/projects/xampp/files/XAMPP%20Mac%20OS%20X/5.5.38/xampp-osx-5.5.38-3-installer.dmg/download
 1. Open your "manager-osx" app that you installed along with XAMPP in the first step, switch to "Manage Servers" tab. Start "MySQL Database" and "Apache Web Server"
 1. In Terminal, navigate to your Applications/XAMPP/htdocs folder `$ cd /Applications/XAMPP/htdocs`
 1. Clone this repository `$ git clone https://github.com/JasonCHCI/trademaster.git` (If you have permission issue with git command, first own your htdocs directory: `$ sudo chown <your_username> .`)
