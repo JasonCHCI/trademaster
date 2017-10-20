@@ -51,6 +51,8 @@ class SiteController
     public function home()
     {
         $pageName = 'Home';
+
+        $result = Test::getAllStocks();
         include_once SYSTEM_PATH . '/view/header.html';
         include_once SYSTEM_PATH . '/view/home.html';
         include_once SYSTEM_PATH . '/view/footer.html';
