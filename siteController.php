@@ -120,6 +120,7 @@ class SiteController
                 session_start();
                 $_SESSION['user'] = $u;
                 $_SESSION['id'] = $id;
+
                 header('Location: '.BASE_URL);
                 exit();
             } else {
@@ -132,7 +133,6 @@ class SiteController
         include_once SYSTEM_PATH.'/view/header.html';
         include_once SYSTEM_PATH.'/view/login.html';
         include_once SYSTEM_PATH.'/view/footer.html';
-
     }
 
     public function trade()
