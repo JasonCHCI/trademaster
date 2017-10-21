@@ -97,13 +97,6 @@ class SiteController
         include_once SYSTEM_PATH . '/view/stock_info.html';
         include_once SYSTEM_PATH . '/view/footer.html';
     }
-    public function market()
-    {
-        $pageName = 'market';
-        include_once SYSTEM_PATH . '/view/header.html';
-        include_once SYSTEM_PATH . '/view/market.html';
-        include_once SYSTEM_PATH . '/view/footer.html';
-    }
 
     public function processLogin($u, $p) {
         $db = Db::instance();
