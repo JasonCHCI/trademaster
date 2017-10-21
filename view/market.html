@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Market Information</title>
+    
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Chrome">
+    <meta name="viewport" content="width=device-width, initial-scale=1.">
+    <meta name="description" content="Market information">
+    <meta name="author" content="Wenhua Lin">
+
+    <link rel="stylesheet" href="css/market.css" />
+
+    <script src="js/market.js"> </script>
+</head>
+<div class="stockshow" style="background-color: floralwhite;">
+<body >
+<!-- This is a comment -->
+<!-- Do not display this at the moment
+<img border="0" src="pic_mountain.jpg" alt="Mountain">
+-->
+    
+<div class="row">
+  <div class="column side">
+      <input type="text" id="myInput1" onkeyup="myFunction()" placeholder="Ticker Symbol..">
+          <h2>Graph</h2>
+      <p>Period: 03/01/2012-04/01/2012</p>
+    <canvas id="myCanvas" width="250" height="200"
+            style="border:1px solid #000000;">
+      </canvas>
+  </div>
+  <div class="column middle">
+      <h2><a href="#">Google</a></h2>
+    <p> Date: 03/12/2012</p>
+    <table width="100%" cellpadding="3" cellspacing="0" bgcolor="#ddd" class="table">
+        <thead>
+        <tr >
+	       <th>Ticker Symbol</th>
+	       <th>Open</th>
+	       <th>Close</th>
+           <th>High</th>
+	       <th>Volumn</th>
+        </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+        
+  </div>
+  <div class="column side">
+            <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for company names..">
+
+      <ul id="myUL">
+        <li><a href="#">Google</a></li>
+        <li><a href="#">Facebook</a></li>
+
+        <li><a href="#">Amazon</a></li>
+        <li><a href="#">Huawei</a></li>
+
+        <li><a href="#">Lenovo</a></li>
+        <li><a href="#">Apple</a></li>
+        <li><a href="#">Orange</a></li>
+      </ul>
+
+  </div>
+</div>
+
+    
+</body>
+</div>
+</html>
