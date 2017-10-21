@@ -30,20 +30,36 @@
       </canvas>
   </div>
   <div class="column middle">
-      <h2><a href="#">Google</a></h2>
-    <p> Date: 03/12/2012</p>
-    <table width="100%" cellpadding="3" cellspacing="0" bgcolor="#ddd" class="table">
-        <thead>
-        <tr >
-	       <th>Ticker Symbol</th>
-	       <th>Open</th>
-	       <th>Close</th>
-           <th>High</th>
-	       <th>Volumn</th>
-        </tr>
-        </thead>
-        <tbody></tbody>
-    </table>
+    <div class="content homelist">
+        <!--Main content code to be written here --> 
+        <ul id="main" style="width: 75%">
+          <?php if($stocks == null): ?>
+  
+          <h1 style="color: black;">You are not holding any stock yet.</h1>
+  
+          <?php else: ?>
+  
+          <?php foreach($stocks as $stock): ?>
+  
+          <?php
+            $ticket = $stock->get('symbol');
+          ?>
+          <div style="padding-top: 20px;">
+            <div class="card">
+              <h3 class="card-header"><?= $ticket ?></h3>
+              <div class="card-block">
+                <h4 class="card-title">Price: Pending</h4>
+                <p class="card-text">Current Volume: <?= $stock->get('volume') ?></p>
+                <a href="#" class="btn btn-primary">View Detail</a>
+              </div>
+            </div>
+          </div>
+          <?php endforeach; ?>
+  
+          <?php endif; ?>
+        </ul>
+        
+      </div>
         
   </div>
   <div class="column side">

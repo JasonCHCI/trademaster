@@ -104,6 +104,8 @@ class SiteController
     public function market()
     {
         $pageName = 'Market';
+        $stocks = Stock::loadById(1);
+        //$stocks = Stock::getStockByDate(strtotime("2016-08-05"));
         include_once SYSTEM_PATH . '/view/header.html';
         include_once SYSTEM_PATH . '/view/market.html';
         include_once SYSTEM_PATH . '/view/footer.html';

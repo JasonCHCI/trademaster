@@ -31,7 +31,7 @@ class Stock extends DbObject {
 
         $this->id = $args['id'];
         $this->symbol = $args['symbol'];
-        $this->date = $args['data'];
+        $this->date = $args['date'];
         $this->open = $args['open'];
         $this->close= $args['close'];
         $this->low  = $args['low'];
@@ -56,6 +56,28 @@ class Stock extends DbObject {
         $query = sprintf(" SELECT id FROM %s WHERE symbol = %s",
             self::DB_TABLE,
             $symbol
+            );
+        $db = Db::instance();
+        $result = $db->lookup($query);
+        if(!mysql_num_rows($result))
+            return null;
+        else {
+            $objects = array();
+            while($row = mysql_fetch_assoc($result)) {
+                $objects[] = self::loadById($row['id']);
+            }
+            return ($objects);
+        }
+    }
+
+        // load stock info by ticker symbol
+    public static function getStockByDate($date=null, $limit=null) {
+        if($date==null) {
+          return null;
+        }
+
+        $query = sprintf(" SELECT id FROM %s WHERE date = '$date'",
+            self::DB_TABLE
             );
         $db = Db::instance();
         $result = $db->lookup($query);
