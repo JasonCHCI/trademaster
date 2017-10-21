@@ -5,7 +5,7 @@ class User extends DbObject {
     const DB_TABLE = 'user';
 
     // database fields
-    protected $user_id;
+    protected $id;
     protected $username;
     protected $password;
     protected $first_name;

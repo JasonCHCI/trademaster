@@ -42,6 +42,10 @@ class SiteController
                 $this->pricing();
                 break;
 
+            case 'market':
+                $this->market();
+                break;
+
             case 'trade':
                 $this->trade();
                 break;
