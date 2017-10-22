@@ -69,13 +69,17 @@ class Stock extends DbObject {
             return ($objects);
         }
     }
-
+    public static function loadByPage($page,$limit,$result) {
+        $offset = ($page-1)*$limit;
+        $select = array_slice($result,$offset,$limit);
+        return $select;
+    }
+    
         // load stock info by ticker symbol
     public static function getStockByDate($date=null, $limit=null) {
         if($date==null) {
           return null;
         }
-
         $query = sprintf(" SELECT id FROM %s WHERE date = '$date'",
             self::DB_TABLE
             );

@@ -56,7 +56,7 @@ body {
 
 /* Middle column */
 .column.middle {
-    width: 50%;
+    width: 70%;
 }
 
 .stockshow {
@@ -85,6 +85,49 @@ body {
     text-align: center;
 }
 
+.pagination {
+    display: inline-block;
+}
+
+.pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+    border: 1px solid #ddd;
+}
+
+.pagination a.active {
+    background-color: #4CAF50;
+    color: white;
+    border: 1px solid #4CAF50;
+}
+
+.pagination a:hover:not(.active) {background-color: #ddd;}
+
+#market {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#market td, #market th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#market tr:nth-child(even){background-color: #f2f2f2;}
+
+#market tr:hover {background-color: #ddd;}
+
+#market th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #f2f2f2;
+    color: #333;
+}
 #myInput {
     /*background-image: url('/css/searchicon.png'); /* Add a search icon to input */
     background-position: 10px 12px; /* Position the search icon */
@@ -104,6 +147,14 @@ body {
     padding: 12px 20px 12px 40px; /* Add some padding */
     border: 1px solid #ddd; /* Add a grey border */
     margin-bottom: 12px; /* Add some space below the input */
+}
+
+#hah {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333333;
 }
 #myUL {
     /* Remove default list styling */

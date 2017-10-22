@@ -21,63 +21,57 @@
 -->
     
 <div class="row">
-  <div class="column side">
-      <input type="text" id="myInput1" onkeyup="myFunction()" placeholder="Ticker Symbol..">
-          <h2>Graph</h2>
-      <p>Period: 03/01/2012-04/01/2012</p>
-    <canvas id="myCanvas" width="250" height="200"
-            style="border:1px solid #000000;">
-      </canvas>
-  </div>
-  <div class="column middle">
-    <div class="content homelist">
-        <!--Main content code to be written here --> 
-        <ul id="main" style="width: 75%">
-          <?php if($stocks == null): ?>
-  
-          <h1 style="color: black;">You are not holding any stock yet.</h1>
-  
-          <?php else: ?>
-  
-          <?php foreach($stocks as $stock): ?>
-  
-          <?php
-            $ticket = $stock->get('symbol');
-          ?>
-          <div style="padding-top: 20px;">
-            <div class="card">
-              <h3 class="card-header"><?= $ticket ?></h3>
-              <div class="card-block">
-                <h4 class="card-title">Price: Pending</h4>
-                <p class="card-text">Current Volume: <?= $stock->get('volume') ?></p>
-                <a href="#" class="btn btn-primary">View Detail</a>
-              </div>
-            </div>
-          </div>
-          <?php endforeach; ?>
-  
-          <?php endif; ?>
-        </ul>
-        
+        <div class="column side">
+                <input type="text" id="myInput" onkeyup="myFunction()" placeholder="company names..">
+                <input type="text" id="myInput" onkeyup="showHint(this.value)" placeholder="company names..">
+                <p>Suggestions: <span id="txtHint"></span></p>
+          <ul id="myUL">
+
+            <li><a href="#">Google</a></li>
+            <li><a href="#">Facebook</a></li>
+    
+            <li><a href="#">Amazon</a></li>
+            <li><a href="#">Huawei</a></li>
+    
+            <li><a href="#">Lenovo</a></li>
+            <li><a href="#">Apple</a></li>
+            <li><a href="#">Orange</a></li>
+          </ul>
+    
       </div>
+  <div class="column middle">
+        <?php
+        $limit = 50;
+        $pages = ceil(sizeof($stocks)/$limit);
+        $offset=0;
+        $pagLink = "<div class='pagination'>"; 
+        for ($i=0;$i<=$pages;$i++){
+            $pagLink .= "<a href='Stock.class.php/page=".$i."'>".$i."</a>";
+        }
+        echo $pagLink . "</div>"; 
+        ?>
+        <!--Main content code to be written here --> 
+        <table id="market">
+          <?php foreach($stocks as $stock): ?>
+          <?php
+            $ticket = $stock->get('id');
+          ?>
+            <tr>
+                    <th><?= $stock->get('id') ?></th>
+                    <th><?= $stock->get('date') ?></th>
+                    <th><?= $stock->get('symbol') ?></th>
+                    <th><?= $stock->get('open') ?></th>
+                    <th><?= $stock->get('close') ?></th>
+                    <th><?= $stock->get('low') ?></th>
+                    <th><?= $stock->get('high') ?></th>
+                    <th><?= $stock->get('volume') ?></th>
+            </tr>
+          <?php endforeach; ?>
+
+        </table>
         
   </div>
-  <div class="column side">
-            <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for company names..">
-
-      <ul id="myUL">
-        <li><a href="#">Google</a></li>
-        <li><a href="#">Facebook</a></li>
-
-        <li><a href="#">Amazon</a></li>
-        <li><a href="#">Huawei</a></li>
-
-        <li><a href="#">Lenovo</a></li>
-        <li><a href="#">Apple</a></li>
-        <li><a href="#">Orange</a></li>
-      </ul>
-
-  </div>
+  
 </div>
 
     
