@@ -97,6 +97,7 @@ class SiteController
     public function pricing()
     {
         $pageName = 'Pricing';
+        $company = Company::getCompanyByStock("MMM");
         include_once SYSTEM_PATH . '/view/header.html';
         include_once SYSTEM_PATH . '/view/stock_info.html';
         include_once SYSTEM_PATH . '/view/footer.html';

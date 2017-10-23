@@ -52,12 +52,23 @@
         ?>
         <!--Main content code to be written here --> 
         <table id="market">
+            <tr>
+                <th>id</th>
+                <th>date</th>
+                <th>symbol</th>
+                <th>open</th>
+                <th>close</th>
+                <th>low</th>
+                <th>high</th>
+                <th>volume</th>
+
+            </tr>
           <?php foreach($stocks as $stock): ?>
           <?php
             $ticket = $stock->get('id');
           ?>
             <tr>
-                    <th><?= $stock->get('id') ?></th>
+                    <th><a href="pricing?symbol=ASS"><?= $stock->get('id') ?></a></th>
                     <th><?= $stock->get('date') ?></th>
                     <th><?= $stock->get('symbol') ?></th>
                     <th><?= $stock->get('open') ?></th>
@@ -69,7 +80,9 @@
           <?php endforeach; ?>
 
         </table>
-        
+        <div>
+            
+        </div>
   </div>
   
 </div>
