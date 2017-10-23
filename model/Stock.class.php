@@ -80,7 +80,7 @@ class Stock extends DbObject {
         if($date==null) {
           return null;
         }
-        $query = sprintf(" SELECT id FROM %s WHERE date = '$date'",
+        $query = sprintf(" SELECT id FROM %s WHERE date = '$date' LIMIT 30",
             self::DB_TABLE
             );
         $db = Db::instance();
