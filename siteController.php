@@ -15,6 +15,8 @@ class SiteController
     // route us to the appropriate class method for this action
     public function route($action)
     {
+        session_start();
+        if($action != 'login' && $action != 'processLogin' && $action != 'welcome' && !isset($_SESSION['user'])) $action = 'loginprompt';
         switch ($action) {
             case 'welcome':
                 $this->welcome();
@@ -28,6 +30,10 @@ class SiteController
                 $username = $_POST['un'];
                 $password = $_POST['pw'];
                 $this->processLogin($username, $password);
+                break;
+
+            case 'processLogout':
+                $this->processLogout();
                 break;
 
             case 'home':
@@ -48,6 +54,10 @@ class SiteController
 
             case 'trade':
                 $this->trade();
+                break;
+
+            case 'loginprompt':
+                $this->loginprompt();
                 break;
 
             // redirect to home page if all else fails
@@ -148,11 +158,26 @@ class SiteController
 
     }
 
+    public function processLogout() {
+        session_start();
+        session_unset();
+        header('Location: '.BASE_URL.'/welcome/');
+        exit();
+    }
+
     public function trade()
     {
         $pageName = 'Trade';
         include_once SYSTEM_PATH . '/view/header.html';
         include_once SYSTEM_PATH . '/view/trade.html';
+        include_once SYSTEM_PATH . '/view/footer.html';
+    }
+
+    public function loginprompt()
+    {
+        $pageName = 'Login Required';
+        include_once SYSTEM_PATH . '/view/header.html';
+        include_once SYSTEM_PATH . '/view/redirect.html';
         include_once SYSTEM_PATH . '/view/footer.html';
     }
 }

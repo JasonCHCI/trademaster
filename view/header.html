@@ -50,7 +50,7 @@
       <li class="nav-item active">
       <a class="nav-link" href="<?= BASE_URL ?>/login">Login</a>
     </li>
-    <?php else: ?>
+    <?php elseif($pageName != 'Login' && $pageName != 'Login Required'): ?>
     <li class="nav-item active">
       <a class="nav-link" href="<?= BASE_URL ?>/home">Home</a>
     </li>
@@ -69,7 +69,7 @@
         <a class="dropdown-item" href="#">Your Stock</a>
         <a class="dropdown-item" href="#">Your Message</a>
         <a class="dropdown-item" href="#">Settings</a>
-        <a class="dropdown-item" href="#">Log Out</a>
+        <a class="dropdown-item" href="<?= BASE_URL ?>/logout/process">Log Out</a>
       </div>
     </li>
     <?php endif; ?>
