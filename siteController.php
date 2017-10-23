@@ -58,6 +58,9 @@ class SiteController
 
             case 'loginprompt':
                 $this->loginprompt();
+
+            case 'transaction':
+                $this->transaction();
                 break;
 
             // redirect to home page if all else fails
@@ -81,7 +84,7 @@ class SiteController
     {
         $pageName = 'Home';
 
-        $holdings = Hold::getHoldsByUserId(1);
+        $holdings = Hold::getHoldsByUserId($_SESSION['id']);
         include_once SYSTEM_PATH . '/view/header.html';
         include_once SYSTEM_PATH . '/view/home.html';
         include_once SYSTEM_PATH . '/view/footer.html';
@@ -107,6 +110,7 @@ class SiteController
     public function pricing()
     {
         $pageName = 'Pricing';
+        $company = Company::getCompanyByStock("MMM");
         include_once SYSTEM_PATH . '/view/header.html';
         include_once SYSTEM_PATH . '/view/stock_info.html';
         include_once SYSTEM_PATH . '/view/footer.html';
@@ -114,8 +118,7 @@ class SiteController
     public function market()
     {
         $pageName = 'Market';
-        $stocks = Stock::loadById(1);
-        //$stocks = Stock::getStockByDate(strtotime("2016-08-05"));
+        $stocks = Stock::getStockByDate("2016-08-05");
         include_once SYSTEM_PATH . '/view/header.html';
         include_once SYSTEM_PATH . '/view/market.html';
         include_once SYSTEM_PATH . '/view/footer.html';
@@ -173,11 +176,21 @@ class SiteController
         include_once SYSTEM_PATH . '/view/footer.html';
     }
 
+
     public function loginprompt()
     {
         $pageName = 'Login Required';
         include_once SYSTEM_PATH . '/view/header.html';
         include_once SYSTEM_PATH . '/view/redirect.html';
+    }
+
+    public function transaction()
+    {
+        $transactions = Transaction::getTransactionsByUserId($_SESSION['id']);
+
+        $pageName = 'Transaction';
+        include_once SYSTEM_PATH . '/view/header.html';
+        include_once SYSTEM_PATH . '/view/transaction.html';
         include_once SYSTEM_PATH . '/view/footer.html';
     }
 }

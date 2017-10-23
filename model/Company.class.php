@@ -1,6 +1,6 @@
 <?php
 
-class Stock extends DbObject {
+class Company extends DbObject {
     // name of database table
     const DB_TABLE = 'company';
 
@@ -77,7 +77,7 @@ class Stock extends DbObject {
             if($symbol==null) {
               return null;
             }
-            $query = sprintf(" SELECT `Company ID` FROM %s WHERE 'Ticker symbol' = %s",
+            $query = sprintf(" SELECT `Company ID` FROM `%s` WHERE `Ticker symbol` = %s",
                 self::DB_TABLE,
                 $symbol
                 );
