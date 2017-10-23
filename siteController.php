@@ -194,4 +194,14 @@ class SiteController
         include_once SYSTEM_PATH . '/view/transaction.html';
         include_once SYSTEM_PATH . '/view/footer.html';
     }
+
+     public function user_profile()
+    {
+
+        $pageName = 'user_profile';
+        include_once SYSTEM_PATH . '/view/header.html';
+        include_once SYSTEM_PATH . '/view/user_profile.html';
+        include_once SYSTEM_PATH . '/view/footer.html';
+    }
 }
+
