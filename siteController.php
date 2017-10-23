@@ -50,6 +50,10 @@ class SiteController
                 $this->trade();
                 break;
 
+            case 'transaction':
+                $this->transaction();
+                break;
+
             // redirect to home page if all else fails
             default:
                 header('Location: ' . BASE_URL);
@@ -153,6 +157,16 @@ class SiteController
         $pageName = 'Trade';
         include_once SYSTEM_PATH . '/view/header.html';
         include_once SYSTEM_PATH . '/view/trade.html';
+        include_once SYSTEM_PATH . '/view/footer.html';
+    }
+
+    public function transaction()
+    {
+        $transactions = Transaction::getTransactionsByUserId(1);
+
+        $pageName = 'Transaction';
+        include_once SYSTEM_PATH . '/view/header.html';
+        include_once SYSTEM_PATH . '/view/transaction.html';
         include_once SYSTEM_PATH . '/view/footer.html';
     }
 }
