@@ -58,6 +58,7 @@ class SiteController
 
             case 'loginprompt':
                 $this->loginprompt();
+                break;
 
             case 'transaction':
                 $this->transaction();
@@ -164,7 +165,7 @@ class SiteController
     public function processLogout() {
         session_start();
         session_unset();
-        header('Location: '.BASE_URL.'/welcome/');
+        header('Location: '.BASE_URL);
         exit();
     }
 
@@ -186,9 +187,9 @@ class SiteController
 
     public function transaction()
     {
+        $pageName = 'Transaction';
         $transactions = Transaction::getTransactionsByUserId($_SESSION['id']);
 
-        $pageName = 'Transaction';
         include_once SYSTEM_PATH . '/view/header.html';
         include_once SYSTEM_PATH . '/view/transaction.html';
         include_once SYSTEM_PATH . '/view/footer.html';
