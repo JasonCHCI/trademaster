@@ -24,6 +24,12 @@ class StockController {
 			}
 			*/
 
+			case 'pricing':
+				$stockID = $_GET['sid']; 
+				$this->stock($stockID);
+				break;
+			
+
 			// redirect to home page if all else fails
 			default:
 			header('Location: '.BASE_URL);
@@ -31,6 +37,14 @@ class StockController {
 		}
 
 	}
+
+	public function stock($sid)
+    {
+        $pageName = 'Pricing';
+        include_once SYSTEM_PATH . '/view/header.html';
+        include_once SYSTEM_PATH . '/view/stock_info.html';
+        include_once SYSTEM_PATH . '/view/footer.html';
+    }
 
 
 

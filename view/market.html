@@ -68,7 +68,7 @@
             $ticket = $stock->get('id');
           ?>
             <tr>
-                    <th><a href="pricing?symbol=ASS"><?= $stock->get('id') ?></a></th>
+                    <th><a href="pricing/<?= $stock->get('id') ?>"><?= $stock->get('id') ?></a></th>
                     <th><?= $stock->get('date') ?></th>
                     <th><?= $stock->get('symbol') ?></th>
                     <th><?= $stock->get('open') ?></th>

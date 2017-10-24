@@ -55,7 +55,7 @@ class Company extends DbObject {
         if($security==null) {
           return null;
         }
-        $query = sprintf(" SELECT `Ticker symbol` FROM %s WHERE Security = %s",
+        $query = sprintf(" SELECT `Ticker_symbol` FROM %s WHERE Security = '%s'",
             self::DB_TABLE,
             $security
             );
@@ -66,7 +66,7 @@ class Company extends DbObject {
         else {
             $objects = array();
             while($row = mysql_fetch_assoc($result)) {
-                $objects[] = $row['Ticker symbol'];
+                $objects[] = $row['Ticker_symbol'];
             }
             return ($objects);
         }
@@ -77,7 +77,7 @@ class Company extends DbObject {
             if($symbol==null) {
               return null;
             }
-            $query = sprintf(" SELECT `Company ID` FROM `%s` WHERE `Ticker symbol` = %s",
+            $query = sprintf(" SELECT id FROM %s WHERE Ticker_symbol = 'MMM'",
                 self::DB_TABLE,
                 $symbol
                 );
@@ -88,7 +88,7 @@ class Company extends DbObject {
             else {
                 $objects = array();
                 while($row = mysql_fetch_assoc($result)) {
-                    $objects[] = self::loadById($row['Company ID']);
+                    $objects[] = self::loadById($row['id']);
                 }
                 return ($objects);
             }
