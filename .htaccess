@@ -25,6 +25,7 @@ RewriteRule ^membership/?$ siteController.php?action=membership [QSA,L]
 RewriteRule ^trade/?$ siteController.php?action=trade [QSA,L]
 RewriteRule ^market/?$ siteController.php?action=market [QSA,L]
 RewriteRule ^transaction/?$ siteController.php?action=transaction [QSA,L]
+RewriteRule ^user_profile/?$ siteController.php?action=user_profile [QSA,L]
 
 
 
