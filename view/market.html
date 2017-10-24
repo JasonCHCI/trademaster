@@ -35,21 +35,8 @@ $results = $paginator->getData($limit, $page );
 
 <div class="row">
     <div class="column side">
+        <h2>Type the ticket symbol to find:</h2>
         <input type="text" id="myInput" onkeyup="myFunction()" placeholder="company names..">
-        <input type="text" id="myInput" onkeyup="showHint(this.value)" placeholder="company names..">
-        <p>Suggestions: <span id="txtHint"></span></p>
-        <ul id="myUL">
-
-            <li><a href="#">Google</a></li>
-            <li><a href="#">Facebook</a></li>
-            
-            <li><a href="#">Amazon</a></li>
-            <li><a href="#">Huawei</a></li>
-            
-            <li><a href="#">Lenovo</a></li>
-            <li><a href="#">Apple</a></li>
-            <li><a href="#">Orange</a></li>
-        </ul>
         
     </div>
     <div class="column middle">
@@ -67,11 +54,11 @@ $results = $paginator->getData($limit, $page );
                             <th>Volume</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="myUL">
                         <?php for( $i = 0; $i < count( $results->data ); $i++ ) : ?>
 
                             <tr>
-                                <td><?php echo $results->data[$i]['symbol']; ?></td>
+                                <td><a href="<?= BASE_URL ?>/pricing/<?= $results->data[$i]['symbol'] ?>"><?php echo $results->data[$i]['symbol']; ?></a></td>
                                 <td><?php echo $results->data[$i]['date']; ?></td>
                                 <td><?php echo $results->data[$i]['open']; ?></td>
                                 <td><?php echo $results->data[$i]['close']; ?></td>

@@ -44,10 +44,6 @@ class SiteController
                 $this->membership();
                 break;
 
-            case 'pricing':
-                $this->pricing();
-                break;
-
             case 'market':
                 $this->market();
                 break;

@@ -40,4 +40,4 @@ RewriteRule ^user_profile/?$ siteController.php?action=user_profile [QSA,L]
 #                                                                                                           #
 #-----------------------------------------------------------------------------------------------------------#
 
-RewriteRule ^pricing/(\d+)/?$ stockController.php?action=pricing&sid=$1 [QSA,L]
+RewriteRule ^pricing/(.+)/?$ stockController.php?action=pricing&ssymbol=$1 [QSA,L]

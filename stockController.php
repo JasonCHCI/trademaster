@@ -25,20 +25,20 @@ class StockController {
 			*/
 
 			case 'pricing':
-				$stockID = $_GET['sid']; 
-				$this->stock($stockID);
+				$stockSymbol = $_GET['ssymbol']; 
+				$this->stock($stockSymbol);
 				break;
 			
 
 			// redirect to home page if all else fails
 			default:
-			header('Location: '.BASE_URL);
-			exit();
+				header('Location: '.BASE_URL);
+				exit();
 		}
 
 	}
 
-	public function stock($sid)
+	public function stock($symbol)
     {
         $pageName = 'Pricing';
         include_once SYSTEM_PATH . '/view/header.html';
