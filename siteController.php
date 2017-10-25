@@ -48,6 +48,10 @@ class SiteController
                 $this->market();
                 break;
 
+            case 'discussion':
+                $this->discussion();
+                break;
+
             case 'trade':
                 $this->trade();
                 break;
@@ -110,6 +114,15 @@ class SiteController
         $stocks = Stock::getStockByDate("2016-08-05");
         include_once SYSTEM_PATH . '/view/header.html';
         include_once SYSTEM_PATH . '/view/market.html';
+        include_once SYSTEM_PATH . '/view/footer.html';
+    }
+
+    public function discussion()
+    {
+        $pageName = 'Discussion';
+        $result = Discussion::getAllDiscussion();
+        include_once SYSTEM_PATH . '/view/header.html';
+        include_once SYSTEM_PATH . '/view/discussion.html';
         include_once SYSTEM_PATH . '/view/footer.html';
     }
 

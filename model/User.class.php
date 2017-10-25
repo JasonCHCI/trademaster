@@ -15,7 +15,7 @@ class User extends DbObject {
     protected $bank_account;
     protected $email;
 	protected $perm;
-    protected $point
+    protected $point;
     protected $membership_start;
     protected $membership_end;
 

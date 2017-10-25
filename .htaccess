@@ -21,6 +21,7 @@ RewriteRule ^login/?$ siteController.php?action=login [QSA,L]
 RewriteRule ^login/process/?$ siteController.php?action=processLogin [QSA,L]
 RewriteRule ^logout/process/?$ siteController.php?action=processLogout [QSA,L]
 RewriteRule ^membership/?$ siteController.php?action=membership [QSA,L]
+RewriteRule ^discussion/?$ siteController.php?action=discussion [QSA,L]
 
 RewriteRule ^trade/?$ siteController.php?action=trade [QSA,L]
 RewriteRule ^market/?$ siteController.php?action=market [QSA,L]
