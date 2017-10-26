@@ -3,13 +3,10 @@
 
 
 <link rel="stylesheet" href="css/user_profile.css" />
-<div class="container">
-      <div class="row">
-      <div class="col-md-5  toppad  pull-right col-md-offset-3 ">
-           <A href="edit.html" >Edit Profile</A>
 
-        <A href="edit.html" >Logout</A>
-       <br>
+          
+
+
 <p class=" text-info">May 05,2014,03:00 pm </p>
       </div>
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
@@ -35,50 +32,79 @@
                     <dd>Male</dd>
                   </dl>
                 </div>-->
+<div id="list">
+<div id="top">
+<h2>Profile for <?= $p->get('username') ?></h2>
+</div>
+  <div id ="info">
+    <b>Full Name:    </b><a><?= $p->get('first_name') ?>  <a><?= $p->get('last_name') ?></a></br>
+    <b>Email:    </b><a><?= $p->get('email') ?>  </a></br>
+    <b>SSN: </b><a><?= $p->get('ssn') ?>  </a></br>
+    <b>DOB: </b><a><?= $p->get('dob') ?>  </a></br>
+  
+
+  </div>
+
+  <div id ="Edit">
+  <ul>
+  <?php
+  if(isset($_SESSION['user'])) {
+    $id = $_SESSION['id'];
+    $pid = $p->get('id');
+    if($id == $pid){
+      echo '<div><form class="act-but1" action="'.BASE_URL.'/cprofile/'.$id.'" method="POST">
+              <button class="bot bot2" type="submit">Edit Profile</button>
+            </form></div></br>';
+    }
+  }
+  ?>
+  </ul>
+  </div>
+
+
+
                 <div class=" col-md-9 col-lg-9 "> 
-                  <table class="table table-user-information">
+                  <table class="table table-user-Basic-information">
                     <tbody>
+                       <tr>
+                           <td>bank_account</td>
+                        <td>19950113</td> 
+                        </tr>
                       <tr>
-                        <td>id</td>
-                        <td>2178199973</td>
-                      </tr>
+                           <td>perm</td>
+                        <td>02</td>  
+                     </tr>
                       <tr>
-                        <td>username</td>
-                        <td>Cesily</td>
-                      </tr>
-                      <tr>
-                           <td>password</td>
-                        <td>19950113</td>
-                      </tr>
-                      <tr>
-                        <td>perm</td>
-                        <td>02</td>
-                      </tr>
-                   
-                         <tr>
-                             <tr>
-                        <td>Gender</td>
-                        <td>Female</td>
-                      </tr>
-                        <tr>
-                        <td>perm</td>
-                        <td>2</td>
+                           <td>point</td>
+                        <td>100</td> 
+ 
                       </tr>
                       <tr>
-                        <td>email</td>
-                        <td><a href="mailto:info@support.com">info@support.com</a></td>
-                      </tr>
                         <td>bank_account</td>
-                        <td>12178199973(Landline)<br><br>555-4567-890(Mobile)
-                        </td>
+                        <td>12178199973(Landline)<br>
+
+                      </tr>
+                      <tr>
+
+                        <td>membership_start</td>
+                        <td>01/01/2017<br>
+
+                      </tr>
+                      <tr>
+
+                        <td>membership_end</td>
+                        <td>01/01/2018<br>
                            
                       </tr>
                      
                     </tbody>
                   </table>
-                  
-                  <a href="#" class="btn btn-primary">store</a>
-                  <a href="#" class="btn btn-primary"> membership_start</a>
+                
+                  <a href=" ??" class="btn btn-primary">save</a>
+                  <a href="stock.html" class="btn btn-primary">stock</a>
+                      
+
+      
                 </div>
               </div>
             </div>
