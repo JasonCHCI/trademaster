@@ -53,7 +53,7 @@ class Stock extends DbObject {
           return null;
         }
 
-        $query = sprintf(" SELECT id FROM %s WHERE symbol = %s",
+        $query = sprintf(" SELECT * FROM %s WHERE symbol = '%s'",
             self::DB_TABLE,
             $symbol
             );
@@ -62,13 +62,13 @@ class Stock extends DbObject {
         if(!mysql_num_rows($result))
             return null;
         else {
-            $objects = array();
-            while($row = mysql_fetch_assoc($result)) {
-                $objects[] = self::loadById($row['id']);
-            }
-            return ($objects);
+            $row = mysql_fetch_assoc($result);
+            $class = __CLASS__;
+            $obj = new $class($row);
+            return ($obj);
         }
     }
+
     public static function loadByPage($page,$limit,$result) {
         $offset = ($page-1)*$limit;
         $select = array_slice($result,$offset,$limit);

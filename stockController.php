@@ -4,7 +4,6 @@ include_once 'global.php';
 
 // get the identifier for the page we want to load
 $action = $_GET['action'];
-
 // instantiate a ProductController and route it
 $pc = new StockController();
 $pc->route($action);
@@ -25,7 +24,7 @@ class StockController {
 			*/
 
 			case 'pricing':
-				$stockSymbol = $_GET['ssymbol']; 
+				$stockSymbol = $_GET['symbol']; 
 				$this->stock($stockSymbol);
 				break;
 
@@ -45,7 +44,9 @@ class StockController {
 
 	public function stock($symbol)
     {
-        $pageName = 'Pricing';
+		$pageName = 'Pricing';
+		$stock = Stock::getStockBySymbol($symbol);
+		$company  = Company::getCompanyByStock($symbol);
         include_once SYSTEM_PATH . '/view/header.html';
         include_once SYSTEM_PATH . '/view/stock_info.html';
         include_once SYSTEM_PATH . '/view/footer.html';

@@ -77,7 +77,7 @@ class Company extends DbObject {
             if($symbol==null) {
               return null;
             }
-            $query = sprintf(" SELECT id FROM %s WHERE Ticker_symbol = 'MMM'",
+            $query = sprintf(" SELECT * FROM %s WHERE Ticker_symbol = '%s'",
                 self::DB_TABLE,
                 $symbol
                 );
@@ -86,11 +86,10 @@ class Company extends DbObject {
             if(!mysql_num_rows($result))
                 return null;
             else {
-                $objects = array();
-                while($row = mysql_fetch_assoc($result)) {
-                    $objects[] = self::loadById($row['id']);
-                }
-                return ($objects);
+                $row = mysql_fetch_assoc($result);
+                $class = __CLASS__;
+                $obj = new $class($row);
+                return ($obj);
             }
         }
 }
