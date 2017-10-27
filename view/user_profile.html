@@ -1,12 +1,18 @@
-
-
-
-
 <link rel="stylesheet" href="css/user_profile.css" />
-
+  
+ 
           
 
 
+
+
+<div class="container">
+      <div class="row">
+      <div class="col-md-5  toppad  pull-right col-md-offset-3 ">
+           <A href="edit.html" >Edit</A>
+
+        <A href="Login.html" >Logout</A>
+       <br>
 <p class=" text-info">May 05,2014,03:00 pm </p>
       </div>
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
@@ -18,7 +24,7 @@
             </div>
             <div class="panel-body">
               <div class="row">
-                <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src="http://babyinfoforyou.com/wp-content/uploads/2014/10/avatar-300x300.png" class="img-circle img-responsive"> </div>
+                <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Profile" src="http://babyinfoforyou.com/wp-content/uploads/2014/10/avatar-300x300.png" class="img-circle img-responsive"> </div>
                 
                 <!--<div class="col-xs-10 col-sm-10 hidden-md hidden-lg"> <br>
                   <dl>
@@ -32,41 +38,43 @@
                     <dd>Male</dd>
                   </dl>
                 </div>-->
-<div id="list">
-<div id="top">
-<h2>Profile for <?= $p->get('username') ?></h2>
-</div>
-  <div id ="info">
-    <b>Full Name:    </b><a><?= $p->get('first_name') ?>  <a><?= $p->get('last_name') ?></a></br>
-    <b>Email:    </b><a><?= $p->get('email') ?>  </a></br>
-    <b>SSN: </b><a><?= $p->get('ssn') ?>  </a></br>
-    <b>DOB: </b><a><?= $p->get('dob') ?>  </a></br>
-  
-
-  </div>
-
-  <div id ="Edit">
-  <ul>
-  <?php
-  if(isset($_SESSION['user'])) {
-    $id = $_SESSION['id'];
-    $pid = $p->get('id');
-    if($id == $pid){
-      echo '<div><form class="act-but1" action="'.BASE_URL.'/cprofile/'.$id.'" method="POST">
-              <button class="bot bot2" type="submit">Edit Profile</button>
-            </form></div></br>';
-    }
-  }
-  ?>
-  </ul>
-  </div>
-
-
-
                 <div class=" col-md-9 col-lg-9 "> 
-                  <table class="table table-user-Basic-information">
+                  <table class="table table-user-information">
                     <tbody>
-                       <tr>
+                      <tr>
+                           <td>id</td>
+                        <td>2178199973</td>
+
+
+
+                      </tr>
+                      <tr>
+                        <td>username</td>
+                        <td>Cesily</td>
+                      </tr>
+                      <tr>
+                           <td>ssn</td>
+                        <td>19950113</td>                                         
+
+                     </tr>
+                      <tr>
+                           <td>first_name</td>
+                        <td>Jerry</td>  
+
+                     </tr>
+                      <tr>
+                           <td>last_name</td>
+                        <td>Tom</td>  
+                     </tr>
+                      <tr>
+                           <td>dob</td>
+                        <td>19950113</td>  
+                    </tr>
+                      <tr>
+                           <td>ssn</td>
+                        <td>19950113</td>  
+                     </tr>
+                      <tr>
                            <td>bank_account</td>
                         <td>19950113</td> 
                         </tr>
@@ -80,11 +88,13 @@
  
                       </tr>
                       <tr>
-                        <td>bank_account</td>
-                        <td>12178199973(Landline)<br>
+                      
+                        <td>email</td>
+                        <td><a href="mailto:info@support.com">info@support.com</a></td>
 
                       </tr>
                       <tr>
+
 
                         <td>membership_start</td>
                         <td>01/01/2017<br>
@@ -99,9 +109,11 @@
                      
                     </tbody>
                   </table>
-                
-                  <a href=" ??" class="btn btn-primary">save</a>
-                  <a href="stock.html" class="btn btn-primary">stock</a>
+               
+                  <a href="membership.html" class="btn btn-primary">Join Us</a>
+
+                  
+                  <a href="home.html" class="btn btn-primary">home</a>
                       
 
       
@@ -120,3 +132,7 @@
         </div>
       </div>
     </div>
+
+     <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">  
+  <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js">
