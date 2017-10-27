@@ -59,6 +59,12 @@ class SiteController
             case 'edit':
                 $this->edit();
                 break;
+            case 'post':
+                $this->post();
+                break;
+            case 'postProcess':
+                $this->postProcess();
+                break;
 
             // redirect to home page if all else fails
             default:
@@ -223,6 +229,31 @@ class SiteController
         alert('You edited your username.');
         window.location.href= baseURL + '/profile/';
         </script>";
+    }
+
+    public function post()
+    {
+        $pageName = 'New Post';
+        include_once SYSTEM_PATH.'/view/header.html';
+        include_once SYSTEM_PATH.'/view/newpost.html';
+        include_once SYSTEM_PATH.'/view/footer.html';
+    }
+
+    public function postProcess()
+    {
+        $db = Db::instance();
+        $data = array(
+            'id' => null,
+            'title' => $_POST['title'],
+            'content' => $_POST['content'],
+            'uid' => $_SESSION['id']
+        );
+
+        $q = $db->buildInsertQuery('discussion', $data);
+        $db->execute($q);
+
+        $_SESSION['msg'] = "Successfully Posted! ";
+        header('Location: '.BASE_URL.'/discussion/');
     }
     
     

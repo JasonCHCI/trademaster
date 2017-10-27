@@ -22,6 +22,8 @@ RewriteRule ^login/process/?$ siteController.php?action=processLogin [QSA,L]
 RewriteRule ^logout/process/?$ siteController.php?action=processLogout [QSA,L]
 RewriteRule ^membership/?$ siteController.php?action=membership [QSA,L]
 RewriteRule ^discussion/?$ siteController.php?action=discussion [QSA,L]
+RewriteRule ^post/?$ siteController.php?action=post [QSA,L]
+RewriteRule ^post/process?$ siteController.php?action=postProcess [QSA,L]
 
 RewriteRule ^trade/?$ siteController.php?action=trade [QSA,L]
 RewriteRule ^market/?$ siteController.php?action=market [QSA,L]
@@ -43,3 +45,4 @@ RewriteRule ^edit/process/?$ siteController.php?action=editProcess [QSA,L]
 #-----------------------------------------------------------------------------------------------------------#
 
 RewriteRule ^pricing/(.+)/?$ stockController.php?action=pricing&ssymbol=$1 [QSA,L]
+RewriteRule ^deletepost/(\d+)/?$ stockController.php?action=deletePost&pid=$1 [QSA,L]

@@ -28,6 +28,11 @@ class StockController {
 				$stockSymbol = $_GET['ssymbol']; 
 				$this->stock($stockSymbol);
 				break;
+
+			case 'deletePost':
+				$postID = $_GET['pid'];
+				$this->deletePost($postID);
+				break;
 			
 
 			// redirect to home page if all else fails
@@ -45,6 +50,15 @@ class StockController {
         include_once SYSTEM_PATH . '/view/stock_info.html';
         include_once SYSTEM_PATH . '/view/footer.html';
     }
+
+    public function deletePost($id) {
+		session_start();
+		$q = "DELETE FROM discussion WHERE id = $id ";
+		$db = Db::instance();
+		$db->execute($q);
+
+		header('Location: '.BASE_URL.'/discussion/');
+	}
 
 
 
