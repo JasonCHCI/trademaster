@@ -1,21 +1,49 @@
-<div class="stockshow" style="background-color: floralwhite; margin-left: 20px; margin-right: 20px;">
-
-<!-- This is a comment -->
-<!-- Do not display this at the moment
-<img border="0" src="pic_mountain.jpg" alt="Mountain">
--->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Stock Detail</title>
     
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Chrome">
+    <meta name="viewport" content="width=device-width, initial-scale=1.">
+    <meta name="description" content="Stock">
+    <meta name="author" content="Wenhua Lin">
 
-  <div style="margin-left: 20px;>
-      <input type="text" id="myInput1" onkeyup="myFunction()" placeholder="Ticker Symbol..">
-          <h2>Graph</h2>
-          <p>Period: 03/01/2012-04/01/2012</p>
-    <canvas id="myCanvas" width="250" height="200"
-            style="border:1px solid #000000;">
+    <link rel="stylesheet" href="css/stock_info.css" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <script src="js/stock_info.js"> </script>
+</head>
 
-      </canvas>
+<div class="stockshow" style=" margin-left: 20px; margin-right: 20px;width: 90%;text-align: center;">
+
+  <div style="margin-left: 20px;background-color: #f1f1f1;padding: 14px 16px;">
+     <h3>Ticker Symbol: <?= $symbol ?></h3>
   </div>
-  <h3> View Stock:<?= $symbol ?></h3>
+  <div style="margin-left: 20px;background-color:white;padding: 14px 16px;">
+    <ul class="w3-ul w3-border">
+        <li class="#">Date: <span class="#"><?= $stock->get('date') ?></span></li>
+        <li class="#">Open: <span class="#"><?= $stock->get('open') ?></span></li> 
+        <li class="#">Close: <span class="#"><?= $stock->get('close') ?></span></li> 
+        <li class="#">Low: <span class="#"><?= $stock->get('low') ?></span></li>
+        <li class="#">High: <span class="#"><?= $stock->get('high') ?></span></li> 
+        <li class="#">Volume: <span class="#"><?= $stock->get('volume') ?></span></li> 
+      </ul>
+ </div>
+</div>
 
-
+<div class="stockshow" style=" margin-left: 20px; margin-right: 20px;width: 90%;text-align: center;">
+    
+      <div style="margin-left: 20px;background-color: #f1f1f1;padding: 14px 16px;">
+         <h3>Company: <?= $company->get('id') ?></h3>
+      </div>
+      <div style="margin-left: 20px;background-color:white;padding: 14px 16px;">
+        <ul class="w3-ul w3-border">
+            <li class="#">Date: <span class="#"><?= $stock->get('date') ?></span></li>
+            <li class="#">Open: <span class="#"><?= $stock->get('open') ?></span></li> 
+            <li class="#">Close: <span class="#"><?= $stock->get('close') ?></span></li> 
+            <li class="#">Low: <span class="#"><?= $stock->get('low') ?></span></li>
+            <li class="#">High: <span class="#"><?= $stock->get('high') ?></span></li> 
+            <li class="#">Volume: <span class="#"><?= $stock->get('volume') ?></span></li> 
+          </ul>
+     </div>
 </div>

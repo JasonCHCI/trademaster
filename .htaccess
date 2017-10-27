@@ -42,4 +42,4 @@ RewriteRule ^edit/process/?$ siteController.php?action=editProcess [QSA,L]
 #                                                                                                           #
 #-----------------------------------------------------------------------------------------------------------#
 
-RewriteRule ^pricing/(.+)/?$ stockController.php?action=pricing&ssymbol=$1 [QSA,L]
+RewriteRule ^pricing/(.+)/?$ stockController.php?action=pricing&symbol=$1 [QSA,L]
