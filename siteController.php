@@ -261,7 +261,12 @@ public function Edit($id) {
         include_once SYSTEM_PATH.'/view/footer.html';
         }
 
-       
+        public function Update() {
+        $pageName = 'user_profile';
+        include_once SYSTEM_PATH.'/view/header.html';
+        include_once SYSTEM_PATH.'/view/user_profile.html';
+        include_once SYSTEM_PATH.'/view/footer.html';
+        }
     
     
 
