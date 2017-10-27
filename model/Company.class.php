@@ -86,11 +86,8 @@ class Company extends DbObject {
             if(!mysql_num_rows($result))
                 return null;
             else {
-                $objects = array();
                 $row = mysql_fetch_assoc($result);
-                $class = __CLASS__;
-                $obj = new $class($row);
-                return ($obj);
+                return ($row);
             }
         }
 }

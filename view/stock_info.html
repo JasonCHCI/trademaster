@@ -34,16 +34,16 @@
 <div class="stockshow" style=" margin-left: 20px; margin-right: 20px;width: 90%;text-align: center;">
     
       <div style="margin-left: 20px;background-color: #f1f1f1;padding: 14px 16px;">
-         <h3>Company: <?= $company->get('security') ?></h3>
+         <h3>Company: <?= $company['Security'] ?></h3>
       </div>
       <div style="margin-left: 20px;background-color:white;padding: 14px 16px;">
         <ul class="w3-ul w3-border">
-            <li class="#">SEC_filings: <span class="#"><?= $company->get('sec_filings') ?></span></li>
-            <li class="#">GICS_Sector: <span class="#"><?= $company->get('gics_sector') ?></span></li> 
-            <li class="#">GICS_Sub_Industry: <span class="#"><?= $company->get('gics_sub_industry') ?></span></li> 
-            <li class="#">Address_of_Headquarters: <span class="#"><?= $company->get('address') ?></span></li>
-            <li class="#">Date_first_added: <span class="#"><?= $company->get('data_added') ?></span></li> 
-            <li class="#">CIK: <span class="#"><?= $company->get('cik') ?></span></li> 
+            <li class="#">SEC_filings: <span class="#"><?= $company['SEC_filings'] ?></span></li>
+            <li class="#">GICS_Sector: <span class="#"><?= $company['GICS_Sector'] ?></span></li> 
+            <li class="#">GICS_Sub_Industry: <span class="#"><?= $company['GICS_Sub_Industry'] ?></span></li> 
+            <li class="#">Address_of_Headquarters: <span class="#"><?= $company['Address_of_Headquarters'] ?></span></li>
+            <li class="#">Date_first_added: <span class="#"><?= $company['Date_first_added'] ?></span></li> 
+            <li class="#">CIK: <span class="#"><?= $company['CIK'] ?></span></li> 
           </ul>
      </div>
 </div>
