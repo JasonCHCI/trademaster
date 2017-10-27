@@ -50,6 +50,22 @@ class SiteController
             case 'transaction':
                 $this->transaction();
                 break;
+         case 'user_profile':
+                $this->user_profile();
+                break;
+             case 'edit':
+                $this->edit();
+          case 'home':
+                $this->home();
+                break;
+             case 'Join_Us':
+                $this->Join_Us();
+            case 'Update':
+                $this->Update();
+                break;
+             case 'Logout':
+                $this->Logout();
+
             // redirect to home page if all else fails
             default:
                 header('Location: ' . BASE_URL);
@@ -231,14 +247,14 @@ public function Edit($id) {
 
         
 
-        public function signup() {
-        $pageName = 'Sign Up';
+        public function Logout() {
+        $pageName = 'Logout';
         include_once SYSTEM_PATH.'/view/header.html';
         include_once SYSTEM_PATH.'/view/Login.html';
         include_once SYSTEM_PATH.'/view/footer.html';
         }
 
-        public function Join Us() {
+        public function Join_Us() {
         $pageName = 'Join_Us';
         include_once SYSTEM_PATH.'/view/header.html';
         include_once SYSTEM_PATH.'/view/membership.html';
