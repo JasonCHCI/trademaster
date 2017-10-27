@@ -31,3 +31,11 @@
 .toppad
 {margin-top:20px;
 }
+
+input.available {
+  background-color: lightgreen;
+}
+
+input.unavailable {
+  background-color: pink;
+}

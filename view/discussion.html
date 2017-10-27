@@ -25,7 +25,7 @@
         ?>
         <div style="padding-top: 20px;">
           <div class="card">
-            <h3 class="card-header"><?= $user->get('username') ?>: <?= $row['title'] ?></h3>
+            <h3 class="card-header"><?= $user->get('username') ?>: <?= $row['title'] ?>&nbsp;&nbsp;&nbsp;&nbsp;<?= $row['time'] ?></h3>
             <div class="card-block">
               <h4 class="card-title">Topic: <?= $row['topic'] ?></h4>
               <p class="card-text"><?= $row['content'] ?></p>

@@ -1,34 +1,56 @@
-$(document).ready(function() {
-    var panels = $('.user-infos');
-    var panelsButton = $('.dropdown-user');
-    panels.hide();
+$(document).ready(function(){
+    $('.hint').hide();
 
-    //Click dropdown
-    panelsButton.click(function() {
-        //get data-for attribute
-        var dataFor = $(this).attr('data-for');
-        var idFor = $(dataFor);
 
-        //current button
-        var currentButton = $(this);
-        idFor.slideToggle(400, function() {
-            //Completed slidetoggle
-            if(idFor.is(':visible'))
-            {
-                currentButton.html('<i class="glyphicon glyphicon-chevron-up text-muted"></i>');
-            }
-            else
-            {
-                currentButton.html('<i class="glyphicon glyphicon-chevron-down text-muted"></i>');
-            }
-        })
+  $('form input').keyup(function() {
+
+    var empty = false;
+    $('form input').each(function() {
+      if ($(this).hasClass("unavailable") || $(this).val() == '') {
+        empty = true;
+      }
     });
 
+    if (empty) {
+      $('#create').attr('disabled', 'disabled');
+    } else {
+      $('#create').removeAttr('disabled');
+    }
+  });
 
-    $('[data-toggle="tooltip"]').tooltip();
+  $('#confirmpw').blur(function(){
+    var confirmpw = $(this).val();
+    var originpw = $('#originpw').val();
 
-    $('button').click(function(e) {
-        e.preventDefault();
-        alert("This is a demo.\n :-)");
-    });
+    if (originpw == '') {
+      $('#originpw').addClass('unavailable').removeClass('available');
+      $('#p_hint').hide();
+    }
+    else if (originpw == confirmpw && originpw != '') {
+      $('#confirmpw').addClass('available').removeClass('unavailable');
+      $('#originpw').addClass('available').removeClass('unavailable');
+      $('#p_hint').hide();
+    } else {
+      $('#confirmpw').addClass('unavailable').removeClass('available');
+      $('#p_hint').show();
+    }
+  });
+
+  $('#originpw').blur(function(){
+    var originpw = $(this).val();
+    var confirmpw = $('#confirmpw').val();
+
+    if (originpw == '') {
+      $('#originpw').addClass('unavailable').removeClass('available');
+      $('#p_hint').hide();
+    }
+    else if (originpw == confirmpw && originpw != '') {
+      $('#confirmpw').addClass('available').removeClass('unavailable');
+      $('#originpw').addClass('available').removeClass('unavailable');
+      $('#p_hint').hide();
+    } else {
+      $('#confirmpw').addClass('unavailable').removeClass('available');
+      $('#p_hint').show();
+    }
+  });
 });

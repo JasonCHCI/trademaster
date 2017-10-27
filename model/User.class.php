@@ -59,18 +59,11 @@ class User extends DbObject {
         $db = Db::instance();
         // omit id and any timestamps
         $db_properties = array(
-            'username' => $this->username,
             'password' => $this->password,
             'email' => $this->email,
             'first_name' => $this->first_name,
             'last_name' => $this->last_name,
-            'perm' => $this->perm,
-            'point' => $this->point,
-            'dob' => $this->dob,
-            'ssn' => $this->ssn,
             'bank_account' => $this->bank_account,
-            'membership_start' => $this->membership_start,
-            'membership_end' => $this->membership_end
 			);
         $db->store($this, __CLASS__, self::DB_TABLE, $db_properties);
     }

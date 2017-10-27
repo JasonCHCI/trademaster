@@ -50,21 +50,15 @@ class SiteController
             case 'transaction':
                 $this->transaction();
                 break;
-         case 'user_profile':
-                $this->user_profile();
+            case 'profile':
+                $this->profile();
                 break;
-             case 'edit':
+            case 'editProcess':
+                $this->editProcess();
+                break;
+            case 'edit':
                 $this->edit();
-          case 'home':
-                $this->home();
                 break;
-             case 'Join_Us':
-                $this->Join_Us();
-            case 'Update':
-                $this->Update();
-                break;
-             case 'Logout':
-                $this->Logout();
 
             // redirect to home page if all else fails
             default:
@@ -79,6 +73,7 @@ class SiteController
         include_once SYSTEM_PATH . '/view/welcome.html';
         include_once SYSTEM_PATH . '/view/footer.html';
     }
+
     public function home()
     {
         $pageName = 'Home';
@@ -87,6 +82,7 @@ class SiteController
         include_once SYSTEM_PATH . '/view/home.html';
         include_once SYSTEM_PATH . '/view/footer.html';
     }
+
     public function login()
     {
         $pageName = 'Login';
@@ -94,6 +90,7 @@ class SiteController
         include_once SYSTEM_PATH . '/view/login.html';
         include_once SYSTEM_PATH . '/view/footer.html';
     }
+
     public function membership()
     {
         $pageName = 'Membership';
@@ -101,6 +98,7 @@ class SiteController
         include_once SYSTEM_PATH . '/view/membership.html';
         include_once SYSTEM_PATH . '/view/footer.html';
     }
+
     public function market()
     {
         $pageName = 'Market';
@@ -109,6 +107,7 @@ class SiteController
         include_once SYSTEM_PATH . '/view/market.html';
         include_once SYSTEM_PATH . '/view/footer.html';
     }
+
     public function discussion()
     {
         $pageName = 'Discussion';
@@ -117,6 +116,7 @@ class SiteController
         include_once SYSTEM_PATH . '/view/discussion.html';
         include_once SYSTEM_PATH . '/view/footer.html';
     }
+
     public function processLogin($u, $p) {
         $db = Db::instance();
         $q = "SELECT * FROM user WHERE username = '$u'; ";
@@ -151,12 +151,14 @@ class SiteController
         include_once SYSTEM_PATH.'/view/login.html';
         include_once SYSTEM_PATH.'/view/footer.html';
     }
+
     public function processLogout() {
         session_start();
         session_unset();
         header('Location: '.BASE_URL);
         exit();
     }
+
     public function trade()
     {
         $pageName = 'Trade';
@@ -164,12 +166,14 @@ class SiteController
         include_once SYSTEM_PATH . '/view/trade.html';
         include_once SYSTEM_PATH . '/view/footer.html';
     }
+
     public function loginprompt()
     {
         $pageName = 'Login Required';
         include_once SYSTEM_PATH . '/view/header.html';
         include_once SYSTEM_PATH . '/view/redirect.html';
     }
+
     public function transaction()
     {
         $pageName = 'Transaction';
@@ -179,94 +183,47 @@ class SiteController
         include_once SYSTEM_PATH . '/view/footer.html';
     }
 
-        
+    public function edit() 
+    {
+        $pageName = 'Edit';
+        $user = User::loadById($_SESSION['id']);
+        include_once SYSTEM_PATH.'/view/header.html';
+        include_once SYSTEM_PATH.'/view/edit.html';
+        include_once SYSTEM_PATH.'/view/footer.html';
+    }
 
+    public function profile() 
+    {
 
-public function Edit($id) {
-        session_start();
-        if($_SESSION['id'] != $id){
-            $pageName = 'edit';
-            include_once SYSTEM_PATH.'/view/header.html';
-            include_once SYSTEM_PATH.'/view/edit.html';
-            include_once SYSTEM_PATH.'/view/footer.html';
-        }
-        else{
-            $pageName = 'Login';
-            $p = User::loadById($id);
-            include_once SYSTEM_PATH.'/view/header.tpl';
-            include_once SYSTEM_PATH.'/view/Login.tpl';
-            include_once SYSTEM_PATH.'/view/footer.tpl';
-        }
+        $user = User::loadById($_SESSION['id']);
+        $member = '';
+        if ($user->get('perm') == 1) $member = 'Trade';
+        else $member = 'Prime';
 
-}
+        $pageName = 'Profile';
+        include_once SYSTEM_PATH.'/view/header.html';
+        include_once SYSTEM_PATH.'/view/user_profile.html';
+        include_once SYSTEM_PATH.'/view/footer.html';
+    }
 
+    public function editProcess()
+    {
+        $p = User::loadById($_SESSION['id']);
 
-
-    public function ProcessEdit($id) {
-        $p = User::loadById($id);
-
-        $p->set('dob', $_POST['dob']);
+        $p->set('password', $_POST['pw']);
         $p->set('email', $_POST['email']);
         $p->set('first_name', $_POST['fname']);
         $p->set('last_name',  $_POST['lname']);
-        $p->set('ssn',  $_POST['ssn']);
+        $p->set('bank_account',  $_POST['bank']);
         $p->save();
 
         session_start();
-        $_SESSION['msg'] = "You edited the username called ".$title;
-        header('Location: '.BASE_URL.'/home/');
+        header('Location: '.BASE_URL.'/profile/');
         echo "<script>
         alert('You edited your username.');
-        window.location.href= baseURL + '/home/';
+        window.location.href= baseURL + '/profile/';
         </script>";
     }
-
- function user_profile($pid) {
-
-        $p = User::loadById($pid);
-        $events = Event::getEventsByUserId($pid);
-
-        $pageName = 'user_profile';
-        include_once SYSTEM_PATH.'/view/header.html';
-        include_once SYSTEM_PATH.'/view/user_profile.html';
-        include_once SYSTEM_PATH.'/view/footer.html';
-        }
-
-        public function user_profile() {
-        session_start();
-        $id = $_SESSION['id'];
-        header('Location: '.BASE_URL.'/user_profile/'.$id);
-
-        }
-        public function home() {
-        $pageName = 'Home';
-        include_once SYSTEM_PATH.'/view/header.html';
-        include_once SYSTEM_PATH.'/view/home.html';
-        include_once SYSTEM_PATH.'/view/footer.html';
-        }
-
-        
-
-        public function Logout() {
-        $pageName = 'Logout';
-        include_once SYSTEM_PATH.'/view/header.html';
-        include_once SYSTEM_PATH.'/view/Login.html';
-        include_once SYSTEM_PATH.'/view/footer.html';
-        }
-
-        public function Join_Us() {
-        $pageName = 'Join_Us';
-        include_once SYSTEM_PATH.'/view/header.html';
-        include_once SYSTEM_PATH.'/view/membership.html';
-        include_once SYSTEM_PATH.'/view/footer.html';
-        }
-
-        public function Update() {
-        $pageName = 'user_profile';
-        include_once SYSTEM_PATH.'/view/header.html';
-        include_once SYSTEM_PATH.'/view/user_profile.html';
-        include_once SYSTEM_PATH.'/view/footer.html';
-        }
     
     
 

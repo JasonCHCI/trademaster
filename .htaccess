@@ -26,13 +26,9 @@ RewriteRule ^discussion/?$ siteController.php?action=discussion [QSA,L]
 RewriteRule ^trade/?$ siteController.php?action=trade [QSA,L]
 RewriteRule ^market/?$ siteController.php?action=market [QSA,L]
 RewriteRule ^transaction/?$ siteController.php?action=transaction [QSA,L]
-RewriteRule ^user_profile/?$ siteController.php?action=user_profile [QSA,L]
-
-RewriteRule ^Join_Us/?$ siteController.php?action=Join_Us [QSA,L]
-RewriteRule ^Logout/?$ siteController.php?action=Logout[QSA,L]
-RewriteRule ^Edit/?$ siteController.php?action=Edit [QSA,L]
+RewriteRule ^profile/?$ siteController.php?action=profile [QSA,L]
 RewriteRule ^edit/?$ siteController.php?action=edit [QSA,L]
-RewriteRule ^Update/?$ siteController.php?action=Update [QSA,L]
+RewriteRule ^edit/process/?$ siteController.php?action=editProcess [QSA,L]
 
 
 
