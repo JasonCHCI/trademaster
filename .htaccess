@@ -26,6 +26,8 @@ RewriteRule ^post/?$ siteController.php?action=post [QSA,L]
 RewriteRule ^post/process?$ siteController.php?action=postProcess [QSA,L]
 
 RewriteRule ^trade/?$ siteController.php?action=trade [QSA,L]
+RewriteRule ^trade/process?$ siteController.php?action=tradeProcess [QSA,L]
+
 RewriteRule ^market/?$ siteController.php?action=market [QSA,L]
 RewriteRule ^transaction/?$ siteController.php?action=transaction [QSA,L]
 RewriteRule ^profile/?$ siteController.php?action=profile [QSA,L]

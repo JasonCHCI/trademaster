@@ -1,19 +1,18 @@
-
-    
-    <?php
+<?php
 include_once 'global.php';
 // get the identifier for the page we want to load
 $action = $_GET['action'];
 // instantiate a SiteController and route it
 $pc = new SiteController();
 $pc->route($action);
+
 class SiteController
 {
     // route us to the appropriate class method for this action
     public function route($action)
     {
         session_start();
-        if($action != 'login' && $action != 'processLogin' && $action != 'welcome' && !isset($_SESSION['user'])) $action = 'loginprompt';
+        if ($action != 'login' && $action != 'processLogin' && $action != 'welcome' && !isset($_SESSION['user'])) $action = 'loginprompt';
         switch ($action) {
             case 'welcome':
                 $this->welcome();
@@ -66,12 +65,17 @@ class SiteController
                 $this->postProcess();
                 break;
 
+            case 'tradeProcess':
+                $this->tradeProcess();
+                break;
+
             // redirect to home page if all else fails
             default:
                 header('Location: ' . BASE_URL);
                 exit();
         }
     }
+
     public function welcome()
     {
         $pageName = 'Welcome';
@@ -123,15 +127,15 @@ class SiteController
         include_once SYSTEM_PATH . '/view/footer.html';
     }
 
-    public function processLogin($u, $p) {
+    public function processLogin($u, $p)
+    {
         $db = Db::instance();
         $q = "SELECT * FROM user WHERE username = '$u'; ";
         $result = mysql_query($q);
         if (!$result) {
             die("Incorrect username or password.");
             exit();
-        }
-        else {
+        } else {
             $adminUsername = '';
             $adminPassword = '';
             $id = 0;
@@ -140,28 +144,29 @@ class SiteController
                 $adminPassword = $row["password"];
                 $id = $row["id"];
             }
-            if(($u == $adminUsername) && ($p == $adminPassword)) {
+            if (($u == $adminUsername) && ($p == $adminPassword)) {
                 session_start();
                 $_SESSION['user'] = $u;
                 $_SESSION['id'] = $id;
-                header('Location: '.BASE_URL);
+                header('Location: ' . BASE_URL);
                 exit();
             } else {
-                $message ="Incorrect username or password.";
+                $message = "Incorrect username or password.";
                 //pop up the aleat message
                 echo "<script type='text/javascript'>alert('$message');</script>";
             }
         }
         $pageName = 'Login';
-        include_once SYSTEM_PATH.'/view/header.html';
-        include_once SYSTEM_PATH.'/view/login.html';
-        include_once SYSTEM_PATH.'/view/footer.html';
+        include_once SYSTEM_PATH . '/view/header.html';
+        include_once SYSTEM_PATH . '/view/login.html';
+        include_once SYSTEM_PATH . '/view/footer.html';
     }
 
-    public function processLogout() {
+    public function processLogout()
+    {
         session_start();
         session_unset();
-        header('Location: '.BASE_URL);
+        header('Location: ' . BASE_URL);
         exit();
     }
 
@@ -189,16 +194,16 @@ class SiteController
         include_once SYSTEM_PATH . '/view/footer.html';
     }
 
-    public function edit() 
+    public function edit()
     {
         $pageName = 'Edit';
         $user = User::loadById($_SESSION['id']);
-        include_once SYSTEM_PATH.'/view/header.html';
-        include_once SYSTEM_PATH.'/view/edit.html';
-        include_once SYSTEM_PATH.'/view/footer.html';
+        include_once SYSTEM_PATH . '/view/header.html';
+        include_once SYSTEM_PATH . '/view/edit.html';
+        include_once SYSTEM_PATH . '/view/footer.html';
     }
 
-    public function profile() 
+    public function profile()
     {
 
         $user = User::loadById($_SESSION['id']);
@@ -207,9 +212,9 @@ class SiteController
         else $member = 'Prime';
 
         $pageName = 'Profile';
-        include_once SYSTEM_PATH.'/view/header.html';
-        include_once SYSTEM_PATH.'/view/user_profile.html';
-        include_once SYSTEM_PATH.'/view/footer.html';
+        include_once SYSTEM_PATH . '/view/header.html';
+        include_once SYSTEM_PATH . '/view/user_profile.html';
+        include_once SYSTEM_PATH . '/view/footer.html';
     }
 
     public function editProcess()
@@ -219,12 +224,12 @@ class SiteController
         $p->set('password', $_POST['pw']);
         $p->set('email', $_POST['email']);
         $p->set('first_name', $_POST['fname']);
-        $p->set('last_name',  $_POST['lname']);
-        $p->set('bank_account',  $_POST['bank']);
+        $p->set('last_name', $_POST['lname']);
+        $p->set('bank_account', $_POST['bank']);
         $p->save();
 
         session_start();
-        header('Location: '.BASE_URL.'/profile/');
+        header('Location: ' . BASE_URL . '/profile/');
         echo "<script>
         alert('You edited your username.');
         window.location.href= baseURL + '/profile/';
@@ -234,9 +239,9 @@ class SiteController
     public function post()
     {
         $pageName = 'New Post';
-        include_once SYSTEM_PATH.'/view/header.html';
-        include_once SYSTEM_PATH.'/view/newpost.html';
-        include_once SYSTEM_PATH.'/view/footer.html';
+        include_once SYSTEM_PATH . '/view/header.html';
+        include_once SYSTEM_PATH . '/view/newpost.html';
+        include_once SYSTEM_PATH . '/view/footer.html';
     }
 
     public function postProcess()
@@ -253,17 +258,40 @@ class SiteController
         $db->execute($q);
 
         $_SESSION['msg'] = "Successfully Posted! ";
-        header('Location: '.BASE_URL.'/discussion/');
+        header('Location: ' . BASE_URL . '/discussion/');
     }
-    
-    
 
+    public function tradeProcess()
+    {
+        $db = Db::instance();
+        if ($_POST['buyorsell'] == "Buy") {
+            $data = array(
+                'id' => null,
+                'symbol' => $_POST['tradetickersymbol'],
+                'volume' => $_POST['quantity'],
+                'price' => $_SESSION['price'],
+                'uid' => $_SESSION['id'],
+                'buyorsell' => 1
+            );
+        }
 
-    
+        else if ($_POST['buyorsell'] == "Sell") {
+            $data = array(
+                'id' => null,
+                'symbol' => $_POST['tradetickersymbol'],
+                'volume' => $_POST['quantity'],
+                'price' => $_SESSION['price'],
+                'uid' => $_SESSION['id'],
+                'buyorsell' => -1
+            );
+        }
 
+        $q = $db->buildInsertQuery('transaction', $data);
+        $db->execute($q);
 
-
-
+        $_SESSION['msg'] = "Trade Successfully Made! ";
+        header('Location: ' . BASE_URL);
+    }
 
 
 }

@@ -16,7 +16,9 @@ class Transaction extends DbObject {
             'id' => null,
             'uid' => 0,
             'volume' => 0,
-            'symbol' => ''
+            'symbol' => '',
+            'buyorsell' => 1,
+            'price' => 0
         );
 
         $args += $defaultArgs;
@@ -25,6 +27,8 @@ class Transaction extends DbObject {
         $this->uid = $args['uid'];
         $this->volume = $args['volume'];
         $this->symbol = $args['symbol'];
+        $this->buyorsell = $args['buyorsell'];
+        $this->price = $args['price'];
     }
 
     // save changes to object
@@ -34,7 +38,10 @@ class Transaction extends DbObject {
             'id' => $this->id,
             'uid' => $this->uid,
             'volume' => $this->volume,
-            'symbol' => $this->symbol
+            'symbol' => $this->symbol,
+            'buyorsell' => $this->buyorsell,
+            'price' => $this->price
+
         );
         $db->store($this, __CLASS__, self::DB_TABLE, $db_properties);
     }
