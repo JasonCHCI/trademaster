@@ -21,7 +21,7 @@
     <div class="row">
         <div class="column side">
             <h2>Current Membership</h2>
-            <p>Prime</p>
+            <p><?= $member ?></p>
         </div>
         <div class="column middle">
             <div class="col-md-10 col-md-offset-1">
@@ -59,8 +59,17 @@
 
         <div class="column side">
             <h2>Change Membership</h2>
-            <p>Trade</p>
-            <input type="submit" value="Cancel Membership">
+            <form action="<?= BASE_URL ?>/membership/change" method="POST">
+                <table class="table table-user-information">
+
+                    <tbody>
+                    <tr>
+                        <td><input type="text" name="mlevel" style="width: 200px;"></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <input type="submit" id="create" name="submit" value="Save">
+            </form>
         </div>
     </div>
 

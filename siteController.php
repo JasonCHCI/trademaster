@@ -69,6 +69,10 @@ class SiteController
                 $this->tradeProcess();
                 break;
 
+            case 'membershipChange':
+                $this->membershipChange();
+                break;
+
             // redirect to home page if all else fails
             default:
                 header('Location: ' . BASE_URL);
@@ -104,6 +108,10 @@ class SiteController
     public function membership()
     {
         $pageName = 'Membership';
+        $user = User::loadById($_SESSION['id']);
+        $member = '';
+        if ($user->get('perm') == 1) $member = 'Trade';
+        else $member = 'Prime';
         include_once SYSTEM_PATH . '/view/header.html';
         include_once SYSTEM_PATH . '/view/membership.html';
         include_once SYSTEM_PATH . '/view/footer.html';
@@ -269,10 +277,19 @@ class SiteController
                 'id' => null,
                 'symbol' => $_POST['tradetickersymbol'],
                 'volume' => $_POST['quantity'],
-                'price' => $_SESSION['price'],
+                'price' => $_POST['price'],
                 'uid' => $_SESSION['id'],
                 'buyorsell' => 1
             );
+
+            $data2 = array(
+                'id' => null,
+                'symbol' => $_POST['tradetickersymbol'],
+                'volume' => $_POST['quantity'],
+                'uid' => $_SESSION['id'],
+            );
+
+
         }
 
         else if ($_POST['buyorsell'] == "Sell") {
@@ -280,17 +297,32 @@ class SiteController
                 'id' => null,
                 'symbol' => $_POST['tradetickersymbol'],
                 'volume' => $_POST['quantity'],
-                'price' => $_SESSION['price'],
+                'price' => $_POST['price'],
                 'uid' => $_SESSION['id'],
                 'buyorsell' => -1
             );
         }
 
-        $q = $db->buildInsertQuery('transaction', $data);
-        $db->execute($q);
+        $q1 = $db->buildInsertQuery('transaction', $data);
+        $db->execute($q1);
+
+        $q2 = $db->buildInsertQuery('hold', $data2);
+        $db->execute($q2);
 
         $_SESSION['msg'] = "Trade Successfully Made! ";
         header('Location: ' . BASE_URL);
+    }
+
+    public function membershipChange()
+    {
+        $p = User::loadById($_SESSION['id']);
+
+        $p->set('perm', $_POST['mlevel']);
+        $p->save();
+        echo $_POST['mlevel'];
+        session_start();
+        header('Location: ' . BASE_URL);
+
     }
 
 
