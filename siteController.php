@@ -282,17 +282,30 @@ class SiteController
                 'buyorsell' => 1
             );
 
-            $data2 = array(
-                'id' => null,
-                'symbol' => $_POST['tradetickersymbol'],
-                'volume' => $_POST['quantity'],
-                'uid' => $_SESSION['id'],
-            );
+
+            $currentHold = Hold::getHoldBySymbol($_SESSION['id'], $_POST['tradetickersymbol']);
+            if ($currentHold == null) {
+                $data2 = array(
+                    'id' => null,
+                    'symbol' => $_POST['tradetickersymbol'],
+                    'volume' => $_POST['quantity'],
+                    'uid' => $_SESSION['id'],
+                );
+                $q2 = $db->buildInsertQuery('hold', $data2);
+                $db->execute($q2);
+            } else {
+                $updatedVolume = $currentHold['volume'] + $_POST['quantity'];
+                $p = User::loadById($currentHold['id']);
+
+                $p->set('volume', $updatedVolume);
+                $p->save();
+                session_start();
+                header('Location: ' . BASE_URL);
+
+            }
 
 
-        }
-
-        else if ($_POST['buyorsell'] == "Sell") {
+        } else if ($_POST['buyorsell'] == "Sell") {
             $data = array(
                 'id' => null,
                 'symbol' => $_POST['tradetickersymbol'],
@@ -306,8 +319,7 @@ class SiteController
         $q1 = $db->buildInsertQuery('transaction', $data);
         $db->execute($q1);
 
-        $q2 = $db->buildInsertQuery('hold', $data2);
-        $db->execute($q2);
+
 
         $_SESSION['msg'] = "Trade Successfully Made! ";
         header('Location: ' . BASE_URL);
@@ -317,11 +329,10 @@ class SiteController
     {
         $p = User::loadById($_SESSION['id']);
 
-        $p->set('perm', $_POST['mlevel']);
+        $p->set('perm', $_POST['membership']);
         $p->save();
-        echo $_POST['mlevel'];
         session_start();
-        header('Location: ' . BASE_URL);
+        header('Location: ' . BASE_URL . '/membership/');
 
     }
 

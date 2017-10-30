@@ -60,15 +60,11 @@
         <div class="column side">
             <h2>Change Membership</h2>
             <form action="<?= BASE_URL ?>/membership/change" method="POST">
-                <table class="table table-user-information">
-
-                    <tbody>
-                    <tr>
-                        <td><input type="text" name="mlevel" style="width: 200px;"></td>
-                    </tr>
-                    </tbody>
-                </table>
-                <input type="submit" id="create" name="submit" value="Save">
+            <p>
+            <th><input type="radio" name="membership" value="1"> Trade</th>
+            <th><input type="radio" name="membership" value="2"> Prime</th> <br>
+            <th><input type="submit" value="Change Membership"></th>
+            </p>
             </form>
         </div>
     </div>

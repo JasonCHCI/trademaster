@@ -1,6 +1,7 @@
 <?php
 
-class Hold extends DbObject {
+class Hold extends DbObject
+{
     // name of database table
     const DB_TABLE = 'hold';
 
@@ -11,13 +12,14 @@ class Hold extends DbObject {
     protected $symbol;
 
     // constructor
-    public function __construct($args = array()) {
+    public function __construct($args = array())
+    {
         $defaultArgs = array(
             'id' => null,
             'user_id' => 0,
             'volume' => 0,
             'symbol' => ''
-            );
+        );
 
         $args += $defaultArgs;
 
@@ -28,7 +30,8 @@ class Hold extends DbObject {
     }
 
     // save changes to object
-    public function save() {
+    public function save()
+    {
         $db = Db::instance();
         // omit id and any timestamps
         $db_properties = array(
@@ -36,38 +39,71 @@ class Hold extends DbObject {
             'user_id' => $this->user_id,
             'volume' => $this->volume,
             'symbol' => $this->symbol
-            );
+        );
         $db->store($this, __CLASS__, self::DB_TABLE, $db_properties);
     }
 
     // load object by ID
-    public static function loadById($id) {
+    public static function loadById($id)
+    {
         $db = Db::instance();
         $obj = $db->fetchById($id, __CLASS__, self::DB_TABLE);
         return $obj;
     }
 
     // load all products
-    public static function getHoldsByUserId($userID=null, $limit=null) {
-        if($userID==null) {
-          return null;
+    public static function getHoldsByUserId($userID = null, $limit = null)
+    {
+        if ($userID == null) {
+            return null;
         }
 
         $query = sprintf(" SELECT id FROM %s WHERE uid = %d",
             self::DB_TABLE,
             $userID
-            );
+        );
         $db = Db::instance();
         $result = $db->lookup($query);
-        if(!mysql_num_rows($result))
+        if (!mysql_num_rows($result))
             return null;
         else {
             $objects = array();
-            while($row = mysql_fetch_assoc($result)) {
+            while ($row = mysql_fetch_assoc($result)) {
                 $objects[] = self::loadById($row['id']);
             }
             return ($objects);
         }
     }
+
+
+    public static function getHoldBySymbol($userID = null, $symbol = null, $limit = null)
+    {
+        if ($userID == null) {
+            return null;
+        }
+
+        $query = sprintf(" SELECT id FROM %s WHERE uid = %d AND symbol = '%s'",
+            self::DB_TABLE,
+            $userID,
+            $symbol
+        );
+        $db = Db::instance();
+        $result = $db->lookup($query);
+        if (!mysql_num_rows($result))
+            return null;
+        else {
+//            $objects = array();
+//            while($row = mysql_fetch_assoc($result)) {
+//                $objects[] = self::loadById($row['id']);
+//            }
+//            return ($objects);
+
+            $row = mysql_fetch_assoc($result);
+//            $obj = new __CLASS__($row);
+//            return $obj;
+            return $row;
+        }
+    }
+
 
 }

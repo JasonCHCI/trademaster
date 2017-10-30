@@ -64,7 +64,9 @@ class User extends DbObject {
             'first_name' => $this->first_name,
             'last_name' => $this->last_name,
             'bank_account' => $this->bank_account,
-			);
+            'perm' => $this->perm
+
+        );
         $db->store($this, __CLASS__, self::DB_TABLE, $db_properties);
     }
 
