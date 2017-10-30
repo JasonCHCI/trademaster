@@ -7,7 +7,7 @@ class Hold extends DbObject
 
     // database fields
     protected $id;
-    protected $user_id;
+    protected $uid;
     protected $volume;
     protected $symbol;
 
@@ -16,7 +16,7 @@ class Hold extends DbObject
     {
         $defaultArgs = array(
             'id' => null,
-            'user_id' => 0,
+            'uid' => 0,
             'volume' => 0,
             'symbol' => ''
         );
@@ -24,7 +24,7 @@ class Hold extends DbObject
         $args += $defaultArgs;
 
         $this->id = $args['id'];
-        $this->user_id = $args['user_id'];
+        $this->uid = $args['uid'];
         $this->volume = $args['volume'];
         $this->symbol = $args['symbol'];
     }
@@ -36,7 +36,7 @@ class Hold extends DbObject
         // omit id and any timestamps
         $db_properties = array(
             'id' => $this->id,
-            'user_id' => $this->user_id,
+            'uid' => $this->uid,
             'volume' => $this->volume,
             'symbol' => $this->symbol
         );

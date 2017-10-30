@@ -294,12 +294,12 @@ class SiteController
                 $q2 = $db->buildInsertQuery('hold', $data2);
                 $db->execute($q2);
             } else {
-                $updatedVolume = $currentHold['volume'] + $_POST['quantity'];
-                $p = User::loadById($currentHold['id']);
+                $p = Hold::loadById($currentHold['id']);
+                $updatedVolume = $p->get('volume') + $_POST['quantity'];
 
                 $p->set('volume', $updatedVolume);
                 $p->save();
-                session_start();
+                
                 header('Location: ' . BASE_URL);
 
             }
