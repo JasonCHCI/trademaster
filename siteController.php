@@ -299,33 +299,61 @@ class SiteController
 
                 $p->set('volume', $updatedVolume);
                 $p->save();
-                
-                header('Location: ' . BASE_URL);
+
+//                header('Location: ' . BASE_URL);
 
             }
 
+            $q1 = $db->buildInsertQuery('transaction', $data);
+            $db->execute($q1);
+            $_SESSION['msg'] = "Trade Successfully Made! ";
+
 
         } else if ($_POST['buyorsell'] == "Sell") {
-            $data = array(
-                'id' => null,
-                'symbol' => $_POST['tradetickersymbol'],
-                'volume' => $_POST['quantity'],
-                'price' => $_POST['price'],
-                'uid' => $_SESSION['id'],
-                'buyorsell' => -1
-            );
+
+            $currentHold = Hold::getHoldBySymbol($_SESSION['id'], $_POST['tradetickersymbol']);
+            if ($currentHold == null) {
+                //pop out a error message
+            } else {
+                $p = Hold::loadById($currentHold['id']);
+                if ($p->get('volume') < $_POST['quantity']) {
+                    //pop out error message
+                } else {
+                    
+                    $data = array(
+                        'id' => null,
+                        'symbol' => $_POST['tradetickersymbol'],
+                        'volume' => $_POST['quantity'],
+                        'price' => $_POST['price'],
+                        'uid' => $_SESSION['id'],
+                        'buyorsell' => -1
+                    );
+
+
+                    $q1 = $db->buildInsertQuery('transaction', $data);
+                    $db->execute($q1);
+
+
+                    $p = Hold::loadById($currentHold['id']);
+                    $updatedVolume = $p->get('volume') - $_POST['quantity'];
+
+                    $p->set('volume', $updatedVolume);
+                    $p->save();
+
+                    $_SESSION['msg'] = "Trade Successfully Made! ";
+
+                }
+            }
         }
 
-        $q1 = $db->buildInsertQuery('transaction', $data);
-        $db->execute($q1);
 
 
 
-        $_SESSION['msg'] = "Trade Successfully Made! ";
         header('Location: ' . BASE_URL);
     }
 
-    public function membershipChange()
+    public
+    function membershipChange()
     {
         $p = User::loadById($_SESSION['id']);
 
