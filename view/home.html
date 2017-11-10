@@ -11,7 +11,6 @@
         <ul class="list">
           <li><a class="home-left" href="<?= BASE_URL ?>/market">Research</a></li>
           <li><a class="home-left" href="<?= BASE_URL ?>/transaction">Transaction History</a></li>
-          <li><a class="home-left" href="#">My Balance</a></li>
           <li><a class="home-left" href="#">Prediction</a></li>
         </ul>
       </div>
@@ -37,7 +36,7 @@
             <div class="card-block">
               <h4 class="card-title">Price: <?= $stock->get('close') ?></h4>
               <p class="card-text">Current Volume: <?= $holding->get('volume') ?></p>
-              <a href="#" class="btn btn-primary">View Detail</a>
+              <a href="<?= BASE_URL ?>/pricing/<?= $ticket ?>" class="btn btn-primary">View Detail</a>
             </div>
           </div>
         </div>
