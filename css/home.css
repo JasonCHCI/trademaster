@@ -4,7 +4,7 @@
     margin-left: 2.5%;
     background: #b3d9ff;
     /* For browsers that do not support gradients */
-    background: -webkit-linear-gradient(#b3d9ff, #cce6ff, #ffffff);
+    background: -webkit-linear-gradient(white, white, white);
     /* For Safari 5.1 to 6.0 */
     background: -o-linear-gradient(#b3d9ff, #cce6ff, #ffffff);
     /* For Opera 11.1 to 12.0 */
