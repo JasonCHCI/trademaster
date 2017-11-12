@@ -314,20 +314,20 @@ class SiteController
 
             $currentHold = Hold::getHoldBySymbol($_SESSION['id'], $_POST['tradetickersymbol']);
             if ($currentHold == null) {
-                header('Location: ' . BASE_URL);
 
+                echo "<script>var baseURL ='".BASE_URL."'</script>";
                 echo "<script>
-                alert('Transaction error');
+                alert('You are not holding this stock!');
                 window.location.href= baseURL;
                 </script>";
             } else {
                 $p = Hold::loadById($currentHold['id']);
                 if ($p->get('volume') < $_POST['quantity']) {
-                    header('Location: ' . BASE_URL);
 
                     //pop out error message
+                    echo "<script>var baseURL ='".BASE_URL."'</script>";
                     echo "<script>
-                    alert('Transaction error');
+                    alert('You are not holding enough this stock!');
                     window.location.href= baseURL;
                     </script>";
                 } else {
