@@ -237,7 +237,7 @@ class SiteController
         $p->save();
 
         session_start();
-        header('Location: ' . BASE_URL . '/profile/');
+        echo "<script>var baseURL ='".BASE_URL."'</script>"; 
         echo "<script>
         alert('You edited your username.');
         window.location.href= baseURL + '/profile/';
