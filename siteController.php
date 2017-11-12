@@ -308,18 +308,30 @@ class SiteController
             $db->execute($q1);
             $_SESSION['msg'] = "Trade Successfully Made! ";
 
+            header('Location: ' . BASE_URL);
 
         } else if ($_POST['buyorsell'] == "Sell") {
 
             $currentHold = Hold::getHoldBySymbol($_SESSION['id'], $_POST['tradetickersymbol']);
             if ($currentHold == null) {
-                //pop out a error message
+                header('Location: ' . BASE_URL);
+
+                echo "<script>
+                alert('Transaction error');
+                window.location.href= baseURL;
+                </script>";
             } else {
                 $p = Hold::loadById($currentHold['id']);
                 if ($p->get('volume') < $_POST['quantity']) {
+                    header('Location: ' . BASE_URL);
+
                     //pop out error message
+                    echo "<script>
+                    alert('Transaction error');
+                    window.location.href= baseURL;
+                    </script>";
                 } else {
-                    
+
                     $data = array(
                         'id' => null,
                         'symbol' => $_POST['tradetickersymbol'],
@@ -341,15 +353,14 @@ class SiteController
                     $p->save();
 
                     $_SESSION['msg'] = "Trade Successfully Made! ";
+                    header('Location: ' . BASE_URL);
+
 
                 }
             }
         }
 
 
-
-
-        header('Location: ' . BASE_URL);
     }
 
     public

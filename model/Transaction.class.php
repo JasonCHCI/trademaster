@@ -67,15 +67,15 @@ class Transaction extends DbObject {
         if(!mysql_num_rows($result))
             return null;
         else {
-//            $objects = array();
-//            while($row = mysql_fetch_assoc($result)) {
-//                $objects[] = self::loadById($row['id']);
-//            }
-//            return ($objects);
-
-            $row = mysql_fetch_assoc($result);
-            $obj = new __CLASS__($row);
-            return $obj;
+            $objects = array();
+            while($row = mysql_fetch_assoc($result)) {
+                $objects[] = self::loadById($row['id']);
+            }
+            return ($objects);
+//
+//            $row = mysql_fetch_assoc($result);
+//            $obj = new __CLASS__($row);
+//            return $obj;
         }
     }
 
