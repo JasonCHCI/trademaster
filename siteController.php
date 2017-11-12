@@ -239,7 +239,7 @@ class SiteController
         session_start();
         echo "<script>var baseURL ='".BASE_URL."'</script>"; 
         echo "<script>
-        alert('You edited your username.');
+        alert('You edited your profile.');
         window.location.href= baseURL + '/profile/';
         </script>";
     }
