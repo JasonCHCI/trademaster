@@ -79,4 +79,75 @@ class Transaction extends DbObject {
         }
     }
 
+
+    public static function getPrediction(){
+        $result = array();
+        $symbol_array = self::getSymbols();
+        foreach ($symbol_array as $symbol) {
+            $transactions = getTransactionsBySymbol($symbol);
+            $total_volume = 0;
+            foreach ($transactions as $transaction) {
+                $volume = $transaction.get('volume');
+                $buyorsell = $transaction.get('buyorsell');
+                if ($buyorsell > 0) {
+                    $total_volume += $volume;
+                } else {
+                    $total_volume -= $volume;
+                }
+            }
+            if ($total_volume > 0) { $result[$symbol] = 'buy';}
+            else {$result[$symbol] = 'sell';}
+
+        }
+
+        return $result;
+    }
+
+    public static function getSymbols(){
+        $query = sprintf(" SELECT symbol FROM %s ",
+            self::DB_TABLE
+        );
+
+        $db = Db::instance();
+        $result = $db->lookup($query);
+        if(!mysql_num_rows($result))
+            return null;
+        else {
+            $objects = array();
+            while ($row = mysql_fetch_assoc($result)) {
+                $objects[] = self::loadById($row['id']);
+            }
+            echo $objects;
+            return ($objects);
+
+        }
+    }
+
+
+    public static function getTransactionsBySymbol($symbol=null, $limit=null) {
+        if($symbol==null) {
+            return null;
+        }
+
+        $query = sprintf(" SELECT id FROM %s WHERE uid = %s",
+            self::DB_TABLE,
+            $symbol
+        );
+        $db = Db::instance();
+        $result = $db->lookup($query);
+        if(!mysql_num_rows($result))
+            return null;
+        else {
+            $objects = array();
+            while($row = mysql_fetch_assoc($result)) {
+                $objects[] = self::loadById($row['id']);
+            }
+            return ($objects);
+//
+//            $row = mysql_fetch_assoc($result);
+//            $obj = new __CLASS__($row);
+//            return $obj;
+        }
+    }
+
 }

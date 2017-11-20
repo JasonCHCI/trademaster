@@ -49,6 +49,11 @@ class SiteController
             case 'transaction':
                 $this->transaction();
                 break;
+
+            case 'prediction':
+                $this->prediction();
+                break;
+
             case 'profile':
                 $this->profile();
                 break;
@@ -199,6 +204,15 @@ class SiteController
         $transactions = Transaction::getTransactionsByUserId($_SESSION['id']);
         include_once SYSTEM_PATH . '/view/header.html';
         include_once SYSTEM_PATH . '/view/transaction.html';
+        include_once SYSTEM_PATH . '/view/footer.html';
+    }
+
+    public function prediction()
+    {
+        $pageName = 'Prediction';
+        $prediction = Transaction::getPrediction();
+        include_once SYSTEM_PATH . '/view/header.html';
+        include_once SYSTEM_PATH . '/view/prediction.html';
         include_once SYSTEM_PATH . '/view/footer.html';
     }
 
