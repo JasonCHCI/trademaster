@@ -32,6 +32,7 @@ RewriteRule ^trade/process?$ siteController.php?action=tradeProcess [QSA,L]
 
 RewriteRule ^market/?$ siteController.php?action=market [QSA,L]
 RewriteRule ^transaction/?$ siteController.php?action=transaction [QSA,L]
+RewriteRule ^prediction/?$ siteController.php?action=prediction [QSA,L]
 RewriteRule ^profile/?$ siteController.php?action=profile [QSA,L]
 RewriteRule ^edit/?$ siteController.php?action=edit [QSA,L]
 RewriteRule ^edit/process/?$ siteController.php?action=editProcess [QSA,L]
