@@ -96,7 +96,7 @@ class SiteController
     public function home()
     {
         $pageName = 'Home';
-        $holdings = Hold::getHoldsByUserId($_SESSION['id']);
+        $holdings = Hold::getHoldsFromViewByUserId($_SESSION['id']);
         include_once SYSTEM_PATH . '/view/header.html';
         include_once SYSTEM_PATH . '/view/home.html';
         include_once SYSTEM_PATH . '/view/footer.html';
@@ -373,6 +373,12 @@ class SiteController
                 }
             }
         }
+
+        $drop_view_query = sprintf("DROP VIEW IF EXISTS holdview"
+        );
+
+        $db = Db::instance();
+        $db->execute($drop_view_query);
 
 
     }
