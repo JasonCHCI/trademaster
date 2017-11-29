@@ -1,4 +1,8 @@
 
+<script src="<?= BASE_URL ?>/js/gl-matrix-min.js"></script>
+<script type="text/javascript" src="<?= BASE_URL ?>/js/webgl-utils.js"></script>
+<script src="<?= BASE_URL ?>/js/mp1.js"></script>
+<body onload="startup();">
 <link href="css/home.css" rel="stylesheet">
 <div class="container-fluid">
   <div class="row">
@@ -47,3 +51,28 @@
       
     </div>
   </div>
+</div>
+  <script id="shader-vs" type="x-shader/x-vertex">
+   attribute vec3 aVertexPosition;
+   attribute vec4 aVertexColor;
+
+    uniform mat4 uMVMatrix;
+    varying vec4 vColor;
+
+    void main(void) {
+        gl_Position = uMVMatrix*vec4(aVertexPosition, 1.0);
+        vColor = aVertexColor;
+    }
+</script>
+
+<script id="shader-fs" type="x-shader/x-fragment">
+precision mediump float;
+varying vec4 vColor;
+void main(void) {
+        gl_FragColor = vColor;
+ }
+</script>
+<div>
+<canvas id="myGLCanvas" width="200" height="200"></canvas>  
+</div>
+
