@@ -64,6 +64,7 @@ class Hold extends DbObject
         );
         $db = Db::instance();
         $result = $db->lookup($query);
+
         if (!mysql_num_rows($result))
             return null;
         else {
@@ -104,6 +105,49 @@ class Hold extends DbObject
             return $row;
         }
     }
+
+
+    public static function getHoldsFromViewByUserId($userID = null, $limit = null)
+    {
+        if ($userID == null) {
+            return null;
+        }
+
+        $create_view_query = sprintf("CREATE OR REPLACE VIEW holdview AS SELECT hold.id, hold.uid, hold.symbol,hold.volume, company.Security FROM hold JOIN company ON hold.symbol = company.Ticker_symbol"
+        );
+
+        $db = Db::instance();
+        $db->execute($create_view_query);
+
+        $query = sprintf(" SELECT * FROM holdview WHERE uid = %d",
+            $userID
+        );
+        $db = Db::instance();
+        $result = $db->lookup($query);
+
+
+        if (!mysql_num_rows($result))
+            return null;
+        else {
+            $objects = array();
+            while ($row = mysql_fetch_assoc($result)) {
+                print_r($row);
+//                $objects[] = self::loadByIdFromView($row['id']);
+                $objects[] = $row;
+            }
+            return ($objects);
+        }
+
+    }
+
+    public static function loadByIdFromView($id)
+    {
+        $db = Db::instance();
+        $obj = $db->fetchByViewId($id, __CLASS__, 'holdview');
+        print_r($obj);
+        return $obj;
+    }
+
 
 
 }

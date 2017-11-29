@@ -27,15 +27,15 @@
         <?php foreach($holdings as $holding): ?>
 
         <?php
-          $ticket = $holding->get('symbol');
+          $ticket = $holding['symbol'];
           $stock = Stock::getStockBySymbol($ticket);
         ?>
         <div style="padding-top: 20px;">
           <div class="card">
-            <h3 class="card-header"><?= $ticket ?></h3>
+            <h3 class="card-header"><?= $ticket ?>: <?= $holding['Security'] ?></h3>
             <div class="card-block">
               <h4 class="card-title">Price: <?= $stock->get('close') ?></h4>
-              <p class="card-text">Current Volume: <?= $holding->get('volume') ?></p>
+              <p class="card-text">Current Volume: <?= $holding['volume'] ?></p>
               <a href="<?= BASE_URL ?>/pricing/<?= $ticket ?>" class="btn btn-primary">View Detail</a>
             </div>
           </div>
