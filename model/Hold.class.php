@@ -119,24 +119,23 @@ class Hold extends DbObject
         $db = Db::instance();
         $db->execute($create_view_query);
 
-        $query = sprintf(" SELECT * FROM holdview WHERE uid = %d",
-            $userID
-        );
-        $db = Db::instance();
-        $result = $db->lookup($query);
+        $host     = DB_HOST;
+        $database = DB_DATABASE;
+        $username = DB_USER;
+        $password = DB_PASS;
 
+        $conn = new mysqli($host, $username, $password, $database);
 
-        if (!mysql_num_rows($result))
-            return null;
-        else {
-            $objects = array();
-            while ($row = mysql_fetch_assoc($result)) {
-                print_r($row);
-//                $objects[] = self::loadByIdFromView($row['id']);
-                $objects[] = $row;
-            }
-            return ($objects);
+        $stmt = $conn->prepare('SELECT symbol, volume, Security FROM holdview WHERE uid = ?');
+        $stmt->bind_param("d", $userID);
+        $stmt->execute();
+        $stmt->bind_result($col1, $col2, $col3);
+        $objects = array();
+        while ($stmt->fetch()) {
+            $objects[] = array('symbol'=>$col1,'volume'=>$col2,'Security'=>$col3);
         }
+        mysqli_stmt_close($stmt);
+        return ($objects);
 
     }
 

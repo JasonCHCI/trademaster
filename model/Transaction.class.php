@@ -59,25 +59,46 @@ class Transaction extends DbObject {
             return null;
         }
 
-        $query = sprintf("SELECT id FROM %s WHERE uid = %d",
-            self::DB_TABLE,
-            $userID
-        );
-        $db = Db::instance();
-        $result = $db->lookup($query);
-        if(!mysql_num_rows($result))
-            return null;
-        else {
-            $objects = array();
-            while($row = mysql_fetch_assoc($result)) {
-                $objects[] = self::loadById($row['id']);
-            }
-            return ($objects);
-//
-//            $row = mysql_fetch_assoc($result);
-//            $obj = new __CLASS__($row);
-//            return $obj;
+        $host     = DB_HOST;
+        $database = DB_DATABASE;
+        $username = DB_USER;
+        $password = DB_PASS;
+
+        $conn = new mysqli($host, $username, $password, $database);
+
+        if (mysqli_connect_errno())
+        {
+            printf("Connect failed: %s\n", mysqli_connect_error());
+            exit();
         }
+
+        $conn->begin_transaction();
+
+        $stmt = $conn->prepare("SELECT id FROM transaction WHERE uid = ?");
+        $stmt->bind_param("d", $userID);
+
+        if(!$stmt->execute())
+        {
+            // rollback if prep stat execution fails
+            $conn->rollback();
+            // exit or throw an exception
+            exit();
+        }
+
+        $stmt->bind_result($col1);
+        $objects = array();
+        while ($stmt->fetch()) {
+            $objects[] = self::loadById($col1);;
+        }
+        $stmt->close();
+
+        // commit transaction
+        $conn->commit();
+
+        // close connection
+        $conn->close();
+
+        return ($objects);
     }
 
 
@@ -109,6 +130,8 @@ class Transaction extends DbObject {
         $query = sprintf(" SELECT symbol FROM %s ",
             self::DB_TABLE
         );
+
+
 
         $db = Db::instance();
         $result = $db->lookup($query);
