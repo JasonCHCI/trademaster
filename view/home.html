@@ -2,7 +2,15 @@
 <script src="<?= BASE_URL ?>/js/gl-matrix-min.js"></script>
 <script type="text/javascript" src="<?= BASE_URL ?>/js/webgl-utils.js"></script>
 <script src="<?= BASE_URL ?>/js/mp1.js"></script>
-<body onload="startup();">
+<?php
+  $user = User::loadById($_SESSION['id']);
+  $point = $user->get('point');
+  $type = 1;
+  if ($point <= 0): ?>
+
+<?php $type = -1; ?>
+<?php endif; ?>
+<body onload="startup(<?= $type ?>);">
 <link href="css/home.css" rel="stylesheet">
 <div class="container-fluid">
   <div class="row">
@@ -73,6 +81,12 @@ void main(void) {
  }
 </script>
 <div>
-<canvas id="myGLCanvas" width="200" height="200"></canvas>  
+<?php  if ($point <= 0): ?>
+
+<h4 style="color: white;">You may want to adjust your investment strategies.</h1>
+<?php else: ?>
+<h4 style="color: white;">Your investment is very healthy.</h1>
+  <?php endif; ?>
+<canvas id="myGLCanvas" width="300" height="300"></canvas>  
 </div>
 

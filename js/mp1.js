@@ -21,6 +21,8 @@ var mvMatrix2 = mat4.create();
 var rotAngle = 0;
 var lastTime = 0;
 var sinscalar = 0;
+var tickscale = 0;
+var rotatescale = 0;
 
 
 /**
@@ -159,15 +161,15 @@ function setupBuffers() {
     0.25, -0.2,  0.0,
     0.55, -0.2,  0.0,
 
-    -0.3,  0.4,  0.0,
-    -0.15,  0.4,  0.0,
-    -0.15,  0.0,  0.0,
-    -0.3,  0.0,  0.0,
+    -0.3,  0.6,  0.0,
+    -0.15,  0.6,  0.0,
+    -0.15,  -0.2,  0.0,
+    -0.3,  -0.2,  0.0,
 
-    0.3,  0.4,  0.0,
-    0.15,  0.4,  0.0,
-    0.15,  0.0,  0.0,
-    0.3,  0.0,  0.0
+    0.3,  0.6,  0.0,
+    0.15,  0.6,  0.0,
+    0.15,  -0.2,  0.0,
+    0.3,  -0.2,  0.0
   ];
 
   gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(triangleVertices), gl.STATIC_DRAW);
@@ -198,20 +200,20 @@ function setupBuffers() {
   vertexColorBuffer = gl.createBuffer();
   gl.bindBuffer(gl.ARRAY_BUFFER, vertexColorBuffer);
   var colors = [
-    0.0, 0.4, 0.4, 1.0,
-    0.0, 0.4, 0.4, 1.0,
+    0.0, 0.0, 0.4, 1.0,
+    0.0, 0.0, 0.4, 1.0,
     0.0, 0.0, 0.4, 1.0,
     0.0, 0.0, 0.4, 1.0,
 
-    0.0, 0.4, 0.4, 1.0,
     0.0, 0.0, 0.4, 1.0,
     0.0, 0.0, 0.4, 1.0,
-    0.0, 0.4, 0.4, 1.0,
+    0.0, 0.0, 0.4, 1.0,
+    0.0, 0.0, 0.4, 1.0,
 
-    0.0, 0.4, 0.4, 1.0,
     0.0, 0.0, 0.4, 1.0,
     0.0, 0.0, 0.4, 1.0,
-    0.0, 0.4, 0.4, 1.0,
+    0.0, 0.0, 0.4, 1.0,
+    0.0, 0.0, 0.4, 1.0,
 
     0.0, 0.0, 0.4, 1.0,
     0.0, 0.0, 0.4, 1.0,
@@ -387,12 +389,11 @@ function animate() {
     var timeNow = new Date().getTime();
     if (lastTime != 0) {
         var elapsed = timeNow - lastTime;
-        rotAngle= (rotAngle+2.0) % 360;
+        rotAngle= (rotAngle+rotatescale) % 360;
     }
     lastTime = timeNow;
-
+    sinscalar += tickscale;
     // Recalculate the vertex buffer for orange part of the badge for each tick
-    sinscalar += 0.1;
     gl.bindBuffer(gl.ARRAY_BUFFER, OrangeVertexPositionBuffer);
     var orangeTriangleVertices = [
       0.05+Math.cos(sinscalar+0.05)*0.15,  -0.3+Math.sin(sinscalar)*0.07,  0.0,
@@ -435,14 +436,22 @@ function animate() {
 /**
  * Startup function called from html code to start program.
  */
- function startup() {
-  console.log("Yo");
-  canvas = document.getElementById("myGLCanvas");
+ function startup(type) {
+  if (type == 1) {
+        tickscale = 0.3;
+        rotatescale = 4;
+  }
+  else {
+    tickscale = 0.05;
+        rotatescale = 1;
+  }
+    canvas = document.getElementById("myGLCanvas");
   gl = createGLContext(canvas);
   setupShaders();
   setupBuffers();
   gl.enable(gl.DEPTH_TEST);
   tick();
+  
 }
 
 /**
