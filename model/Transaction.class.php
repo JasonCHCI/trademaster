@@ -145,7 +145,7 @@ class Transaction extends DbObject {
 //                $objects[] = self::loadById($row['id']);
                 array_push($objects, $row['symbol']);
             }
-            print_r($objects);
+            
             return ($objects);
 
         }
